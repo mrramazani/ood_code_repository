@@ -1,5 +1,7 @@
 package ui.contentpanel;
 
+import content.Content;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -10,6 +12,8 @@ public class DialogCreateInterContentRelation extends JDialog {
     private JTextField textField1;
     private JTextField textField2;
     private JComboBox comboBox1;
+    private Content first;
+    private Content second;
 
     public DialogCreateInterContentRelation() {
         setSize(400,600);
@@ -44,6 +48,22 @@ public class DialogCreateInterContentRelation extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    }
+
+    public Content getFirst() {
+        return first;
+    }
+
+    public void setFirst(Content first) {
+        this.first = first;
+    }
+
+    public Content getSecond() {
+        return second;
+    }
+
+    public void setSecond(Content second) {
+        this.second = second;
     }
 
     private void onOK() {

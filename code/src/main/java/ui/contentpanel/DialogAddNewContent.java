@@ -27,13 +27,7 @@ public class DialogAddNewContent extends JDialog {
     private JLabel filenameLabel;
     private JLabel labelsLabel;
 
-//    @Autowired
-    private MongoClient mongoClient;
 
-//    @Autowired
-    private Morphia morphia;
-
-//    @Autowired
     private ContentCatalogue contentCatalogue;
 
     public DialogAddNewContent() {

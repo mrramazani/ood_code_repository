@@ -3,6 +3,7 @@ package content;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Reference;
 
 /**
  * @author Hamid Ramazani (mrramazani@gmail.com)
@@ -12,7 +13,9 @@ import org.mongodb.morphia.annotations.Id;
 public class Relationship {
     @Id
     private ObjectId id;
+    @Reference
     private Content firstContent;
+    @Reference
     private Content secondContent;
     private String type;
     private String attribute;
@@ -22,6 +25,10 @@ public class Relationship {
         this.secondContent = secondContent;
         this.type = type;
         this.attribute = attribute;
+    }
+
+    public ObjectId getId() {
+        return id;
     }
 
     public Content getFirstContent() {

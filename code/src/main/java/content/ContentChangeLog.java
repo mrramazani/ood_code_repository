@@ -1,7 +1,9 @@
 package content;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Reference;
 import user.User;
 
 import java.util.Date;
@@ -13,7 +15,8 @@ import java.util.Date;
 @Entity
 public class ContentChangeLog {
     @Id
-    private String id;
+    private ObjectId id;
+    @Reference
     private Content content;
     private ChangeType changeType;
     private Date date;

@@ -1,8 +1,9 @@
 package user;
 
-import org.mongodb.morphia.annotations.Embedded;
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Reference;
 
 import java.util.Date;
 
@@ -13,7 +14,8 @@ import java.util.Date;
 @Entity
 public class UserActivityLog {
     @Id
-    private String id;
+    private ObjectId id;
+    @Reference
     private User user;
     private ActivityType type;
     private Date date;
@@ -24,6 +26,10 @@ public class UserActivityLog {
         this.type = type;
         this.date = date;
         this.detail = detail;
+    }
+
+    public ObjectId getId() {
+        return id;
     }
 
     public User getUser() {

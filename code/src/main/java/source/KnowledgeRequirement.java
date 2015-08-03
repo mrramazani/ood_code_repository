@@ -1,5 +1,6 @@
 package source;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @Entity
 public class KnowledgeRequirement {
     @Id
-    private String id;
+    private ObjectId id;
     private String title;
     private String text;
     private List<String> tags;
@@ -23,11 +24,11 @@ public class KnowledgeRequirement {
         this.tags = tags;
     }
 
-    public String getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 

@@ -8,6 +8,8 @@ import content.Content;
 import content.Relationship;
 import default_.UserLoginDialog;
 import org.mongodb.morphia.Morphia;
+import ui.userpanel.MainPanel;
+import ui.userpanel.UserPanel;
 import user.User;
 
 import java.awt.*;
@@ -23,9 +25,9 @@ public class Main {
 
             @Override
             public void run() {
-                UserLoginDialog loginPage = new UserLoginDialog();
-//                FormMainPage mainPage = new FormMainPage();
-                loginPage.setVisible(true);
+//                UserLoginDialog loginPage = new UserLoginDialog();
+                UserPanel mainPage = new UserPanel();
+                mainPage.setVisible(true);
             }
         });
 

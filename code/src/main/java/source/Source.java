@@ -30,6 +30,14 @@ public class Source {
     public Source() {
     }
 
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
