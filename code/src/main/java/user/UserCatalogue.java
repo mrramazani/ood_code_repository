@@ -1,0 +1,77 @@
+package user;
+
+import abstractCatalogue.AbstractCatalogue;
+import content.ContentChangeLog;
+import repository.UserActivityRepository;
+import repository.UserRepository;
+
+import java.util.LinkedList;
+import java.util.List;
+
+/**
+ * @author Hamid Ramazani (mrramazani@gmail.com)
+ *         Created on 7/21/2015
+ */
+public class UserCatalogue extends AbstractCatalogue{
+
+    private UserRepository userRepository;
+    private UserActivityRepository activityRepository;
+
+    public UserCatalogue() {
+        super();
+        userRepository = new UserRepository(super.getMorphia(), super.getMongoClient());
+        activityRepository = new UserActivityRepository(super.getMongoClient(), super.getMorphia(), "test");
+    }
+
+    private List<User> users = new LinkedList<User>();
+
+    // TODO
+    public boolean login(User user) {
+        return true;
+    }
+
+    // TODO
+    public boolean logout(User user) {
+        return true;
+    }
+
+    // TODO
+    public void addUser(User user) {
+        User existingUser = userRepository.findByUsername(user.getUsername());
+        if (null != existingUser)
+            user.setId(existingUser.getId());
+        userRepository.save(user);
+    }
+
+    // TODO
+    public void editUser(User user) {
+        userRepository.save(user);
+    }
+
+    // TODO
+    public void deleteUser(User user) {
+        userRepository.delete(user);
+    }
+
+    // TODO
+    public List<User> list() {
+        return users;
+    }
+
+    // TODO
+    public List<User> search(String keyword) {
+        return null;
+    }
+
+    public List<UserActivityLog> getActivities(String username) {
+        User user = userRepository.findByUsername(username);
+        return activityRepository.getUserActivityForUser(user);
+    }
+
+    public User authenticate(String username, String password) {
+        User byUsername = userRepository.findByUsername(username);
+        if (byUsername.getPassword().equals(password))
+            return byUsername;
+        return null;
+    }
+}
