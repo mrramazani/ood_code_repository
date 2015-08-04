@@ -24,6 +24,7 @@ public class Content {
     private List<String> comments = new ArrayList<String>();
     private List<Double> ratings = new ArrayList<Double>();
     private double averageRating;
+    private int numOfRatings;
 
 
     public void addTag(String keyword) {
@@ -116,6 +117,14 @@ public class Content {
 
     public void setAverageRating(double averageRating) {
         this.averageRating = averageRating;
+    }
+
+    public int getNumOfRatings() {
+        return numOfRatings;
+    }
+
+    public void setNumOfRatings(int numOfRatings) {
+        this.numOfRatings = numOfRatings;
     }
 
     public ObjectId getId() {

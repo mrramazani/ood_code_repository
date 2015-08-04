@@ -1,14 +1,30 @@
 package ui.contentpanel;
 
+import content.Content;
+import content.ContentCatalogue;
+import sun.plugin2.gluegen.runtime.CPU;
+import user.ActivityType;
+import user.User;
+import user.UserActivityLog;
+import user.UserCatalogue;
+
 import javax.swing.*;
 import java.awt.event.*;
 
-public class ChangeScoreDialog extends JDialog {
+public class ChangeContentScoreDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
+    private User user;
+    private Content content;
 
-    public ChangeScoreDialog() {
+    public ChangeContentScoreDialog(User user, Content content) {
+        createUI();
+        this.user = user;
+        this.content = content;
+    }
+
+    private void createUI() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -42,7 +58,7 @@ public class ChangeScoreDialog extends JDialog {
     }
 
     private void onOK() {
-// add your code here
+
         dispose();
     }
 

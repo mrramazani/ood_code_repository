@@ -1,9 +1,11 @@
 package ui.userpanel;
 
+import source.Source;
 import source.SourceCatalogue;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.File;
 
 public class CreateResourceDialog extends JDialog {
     private JPanel contentPane;
@@ -12,18 +14,32 @@ public class CreateResourceDialog extends JDialog {
     private JTextField srcname;
     private JComboBox category;
     private JTextField path;
+    private JButton pathBtn;
 
     public CreateResourceDialog() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-
+        category.addItem("فارسی");
+        category.addItem("لاتین");
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
-
+        pathBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                int result = fileChooser.showDialog(fileChooser,"Open/Save");
+                if(result == JFileChooser.APPROVE_OPTION)
+                {
+                    File file = fileChooser.getSelectedFile();
+                    path.setText(file.getAbsolutePath());
+                }
+            }
+        });
         buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -48,6 +64,10 @@ public class CreateResourceDialog extends JDialog {
 
     private void onOK() {
         SourceCatalogue sourceCatalogue = new SourceCatalogue();
+        Source src = new Source(srcname.getText(), path.getText(), category.getSelectedItem().toString());
+        sourceCatalogue.addSource(src);
+        JOptionPane.showConfirmDialog(this, "منبع با موفقیت ایجاد شد.", "", JOptionPane.INFORMATION_MESSAGE);
+        dispose();
     }
 
     private void onCancel() {

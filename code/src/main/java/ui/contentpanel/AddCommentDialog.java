@@ -1,10 +1,16 @@
 package ui.contentpanel;
 
+import content.Comment;
 import content.Content;
+import content.ContentCatalogue;
+import user.ActivityType;
 import user.User;
+import user.UserActivityLog;
+import user.UserCatalogue;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.Date;
 
 public class AddCommentDialog extends JDialog {
     private JPanel contentPane;
@@ -12,7 +18,6 @@ public class AddCommentDialog extends JDialog {
     private JButton buttonCancel;
     private JLabel label;
     private JTextArea comment;
-    private JLabel msgLabel;
     private Content content;
     private User user;
 
@@ -74,7 +79,11 @@ public class AddCommentDialog extends JDialog {
     }
 
     private void onOK() {
-// add your code here
+        Comment cmt = new Comment(comment.getText(), user, new Date(), content);
+        ContentCatalogue contentCatalogue = new ContentCatalogue();
+        contentCatalogue.addComment(cmt);
+        UserCatalogue userCatalogue = new UserCatalogue();
+        userCatalogue.addUserActivity(new UserActivityLog(user, ActivityType.COMMENT, new Date(), "ثبت نظر برای محتوای " + content.getName()));
         dispose();
     }
 

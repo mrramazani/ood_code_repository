@@ -15,7 +15,6 @@ public class Comment {
 
     @Id
     private ObjectId id;
-//    private CommentRepository;
     private String comment;
     @Reference
     private User user;

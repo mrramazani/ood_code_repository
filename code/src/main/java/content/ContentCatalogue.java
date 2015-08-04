@@ -28,6 +28,8 @@ public class ContentCatalogue extends AbstractCatalogue {
         contentRepository.save(content);
     }
 
+    public void updateContent(Content content) {contentRepository.save(content);}
+
     public void log(ContentChangeLog log) {
         contentChangeRepository.save(log);
     }

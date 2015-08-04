@@ -35,9 +35,11 @@ public class ViewContentDialog extends JFrame {
     private Content content;
     private User user;
 
-    public ViewContentDialog() {
+    public ViewContentDialog(Content contentIn, User userIn) {
         setContentPane(contentPane);
 //        setModal(true);
+        this.content = contentIn;
+        this.user = userIn;
         titleField.setText(content.getName());
         bodyArea.setText(content.getText());
         fileAdr.setText(content.getFiles());
@@ -48,7 +50,7 @@ public class ViewContentDialog extends JFrame {
         String tags = builder.toString();
         tagField.setText(tags);
         rateField.setText(String.valueOf(content.getAverageRating()));
-        // TODO: set contetn of tabel;
+        // TODO: set comments of table;
 
 
         // TODO: copy this part to add new content dialog
@@ -94,6 +96,22 @@ public class ViewContentDialog extends JFrame {
                 dialog.setVisible(true);
             }
         });
+    }
+
+    public Content getContent() {
+        return content;
+    }
+
+    public void setContent(Content content) {
+        this.content = content;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     private Object[][] tableComments() {

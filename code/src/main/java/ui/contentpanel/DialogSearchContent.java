@@ -1,6 +1,8 @@
 package ui.contentpanel;
 
+import content.Content;
 import content.ContentCatalogue;
+import user.User;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -10,8 +12,16 @@ public class DialogSearchContent extends JDialog {
     private JButton buttonSearch;
     private JButton buttonCancel;
     private JTextField searchField;
+    private User user;
 
-    public DialogSearchContent() {
+    public DialogSearchContent(User user) {
+        createUI();
+        this.user = user;
+    }
+
+
+
+    private void createUI() {
         setSize(400, 200);
         setTitle("جستجوی محتوا");
         setContentPane(contentPane);
@@ -48,9 +58,15 @@ public class DialogSearchContent extends JDialog {
 
     private void onOK() {
         ContentCatalogue catalogue = new ContentCatalogue();
-        catalogue.search(searchField.getText());
-        // TODO: show content view
-//        dispose();
+        Content content = catalogue.search(searchField.getText());
+        if (null != content) {
+            ViewContentDialog viewContentDialog = new ViewContentDialog(content, user);
+            viewContentDialog.setVisible(true);
+            dispose();
+        }
+        else {
+            JOptionPane.showConfirmDialog(this, "محتوای مورد نظر یافت نشد.","خطا", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void onCancel() {

@@ -28,11 +28,7 @@ public abstract class AbstractCatalogue {
         classesToMap.add(Comment.class);
         classesToMap.add(Relationship.class);
         morphia = new Morphia(classesToMap);
-        try {
-            mongoClient = new MongoClient("localhost", 27017);
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
+        mongoClient = new MongoClient("localhost", 27017);
     }
 
     public Morphia getMorphia() {

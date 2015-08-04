@@ -84,7 +84,7 @@ public class AdminPanel extends MainPanel{
         });
         adminMenu.add(addUser);
         adminMenu.add(deleteUser);
-
+        adminMenu.add(changeScore);
         JMenuItem addSource = new JMenuItem("ایجاد منبع");
         addSource.addActionListener(new ActionListener() {
             @Override

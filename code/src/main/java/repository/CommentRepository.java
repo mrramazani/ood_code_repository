@@ -1,6 +1,5 @@
 package repository;
 
-import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import content.Comment;
 import content.Content;

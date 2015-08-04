@@ -91,7 +91,7 @@ public class ContentPanel extends JFrame{
 
                     @Override
                     public void run() {
-                        DialogSearchContent sc = new DialogSearchContent();
+                        DialogSearchContent sc = new DialogSearchContent(user);
                         sc.setVisible(true);
                     }
                 });

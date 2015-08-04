@@ -38,6 +38,7 @@ public class MainPanel extends JFrame {
     }
 
     public void createUI() {
+        setSize(800, 600);
         menubar = new JMenuBar();
         ImageIcon icon = new ImageIcon("exit.png");
         JMenu userMng = new JMenu("مدیریت پروفایل");

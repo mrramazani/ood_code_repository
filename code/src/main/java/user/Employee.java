@@ -40,6 +40,9 @@ public class Employee extends User {
         setExpertise(user.getExpertise());
     }
 
+    public Employee() {
+    }
+
     public void changeScore(double score) {
         overallScore = score;
     }

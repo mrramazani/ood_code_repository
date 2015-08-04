@@ -52,7 +52,8 @@ public class ChangeScoreDialog extends JDialog {
             JOptionPane.showConfirmDialog(this, "این کاربر وجود ندارد.", "خطا", JOptionPane.ERROR_MESSAGE);
         }
         else {
-            UserActivityLog log = new UserActivityLog(user, ActivityType.CHANGE_SCORE, new Date(), reason.getText());
+            UserActivityLog log = new UserActivityLog(user, ActivityType.CHANGE_SCORE, new Date(), "تغییر امتیاز به علت:"
+                    + reason.getText());
             Employee employee = new Employee(user);
             employee.setOverallScore(employee.getOverallScore() + Double.parseDouble(score.getText()));
             userCatalogue.addUserActivity(log);

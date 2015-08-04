@@ -1,15 +1,10 @@
 package repository;
 
-import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import content.Content;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
-import user.User;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Hamid Ramazani (mrramazani@gmail.com)

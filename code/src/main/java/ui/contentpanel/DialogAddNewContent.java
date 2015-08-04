@@ -6,7 +6,10 @@ import content.Content;
 import content.ContentCatalogue;
 import content.Relationship;
 import org.mongodb.morphia.Morphia;
+import user.ActivityType;
 import user.User;
+import user.UserActivityLog;
+import user.UserCatalogue;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -108,6 +111,9 @@ public class DialogAddNewContent extends JDialog {
         String[] tags = LabelsTextField.getText().split(",");
         content.setTags(Arrays.asList(tags));
         contentCatalogue.addContent(content);
+
+        UserCatalogue userCatalogue = new UserCatalogue();
+        userCatalogue.addUserActivity(new UserActivityLog(user, ActivityType.CREATE, new Date(), "ایجاد محتوای جدید: " + content.getName()));
     }
 
     private void onCancel() {

@@ -1,19 +1,24 @@
 package ui.contentpanel;
 
 import content.Content;
+import content.ContentCatalogue;
+import user.ActivityType;
 import user.User;
+import user.UserActivityLog;
+import user.UserCatalogue;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.Date;
 
 public class ContentEvaluationDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
     private JLabel contLbl;
-    private JTextField textField2;
-    private JLabel nameLbl;
-    private JLabel msgLabel;
+    private JTextField score;
+    private JTextField textField1;
+//    private JLabel nameLbl;
     private Content content;
     private User user;
 
@@ -25,7 +30,6 @@ public class ContentEvaluationDialog extends JDialog {
         this.content = content;
         this.user = user;
         createUI();
-        nameLbl.setText(content.getName());
     }
 
     private void createUI() {
@@ -57,6 +61,8 @@ public class ContentEvaluationDialog extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        textField1.setText(content.getName());
+        textField1.setEnabled(false);
     }
 
     public User getUser() {
@@ -68,11 +74,22 @@ public class ContentEvaluationDialog extends JDialog {
     }
 
     private void onOK() {
-        msgLabel.setText("امتیاز شما با موفقیت ثبت شد.");
+        UserCatalogue userCatalogue = new UserCatalogue();
+        ContentCatalogue contentCatalogue = new ContentCatalogue();
+        double temp = content.getAverageRating() * content.getNumOfRatings();
+        content.setNumOfRatings(content.getNumOfRatings() + 1);
+        content.setAverageRating((temp + Double.parseDouble(score.getText())) / content.getNumOfRatings());
+        contentCatalogue.updateContent(content);
+        userCatalogue.addUserActivity(new UserActivityLog(user, ActivityType.EVALUATE, new Date(), "ثبت امتیاز ارزیابی محتوا: " + content.getName()));
+        JOptionPane.showConfirmDialog(this, "امتیاز شما با موفقیت ثبت شد.");
         dispose();
     }
 
     private void onCancel() {
         dispose();
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }

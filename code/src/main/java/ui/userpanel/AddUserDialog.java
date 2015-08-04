@@ -1,5 +1,7 @@
 package ui.userpanel;
 
+import user.Employee;
+import user.SysAdmin;
 import user.User;
 import user.UserCatalogue;
 
@@ -80,6 +82,13 @@ public class AddUserDialog extends JFrame {
         String[] split = expertiseField.getText().split(",");
         user.setExpertise(Arrays.asList(split));
         UserCatalogue userCatalogue = new UserCatalogue();
+        userCatalogue.addUser(user);
+        if (user.isAdmin()) {
+            user = new SysAdmin();
+        }
+        else {
+            user = new Employee(user);
+        }
         userCatalogue.addUser(user);
         dispose();
     }

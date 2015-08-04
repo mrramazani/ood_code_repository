@@ -12,7 +12,7 @@ import java.util.List;
  * @author Hamid Ramazani (mrramazani@gmail.com)
  *         Created on 7/21/2015
  */
-@Entity
+@Entity(noClassnameStored = true)
 public class User {
     @Id
     private ObjectId id;
