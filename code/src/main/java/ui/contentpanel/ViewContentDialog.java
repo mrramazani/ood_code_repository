@@ -3,9 +3,12 @@ package ui.contentpanel;
 import content.Comment;
 import content.Content;
 import content.ContentCatalogue;
+import user.User;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.List;
 
 public class ViewContentDialog extends JFrame {
@@ -30,13 +33,14 @@ public class ViewContentDialog extends JFrame {
     private JButton relationBtn;
     private JTable table1;
     private Content content;
+    private User user;
 
     public ViewContentDialog() {
         setContentPane(contentPane);
 //        setModal(true);
         titleField.setText(content.getName());
         bodyArea.setText(content.getText());
-        fileAdr.setText(content.getFiles().get(0));
+        fileAdr.setText(content.getFiles());
         StringBuilder builder = new StringBuilder();
         for (String tag: content.getTags()) {
             builder.append(tag).append(",");
@@ -47,11 +51,46 @@ public class ViewContentDialog extends JFrame {
         // TODO: set contetn of tabel;
 
 
+        // TODO: copy this part to add new content dialog
+        upldBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                int result = fileChooser.showDialog(fileChooser,"Open/Save");
+                if(result == JFileChooser.APPROVE_OPTION)
+                {
+                    File file = fileChooser.getSelectedFile();
+                    fileAdr.setText(file.getAbsolutePath());
+                }
+            }
+        });
         relationBtn.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DialogCreateInterContentRelation dialog = new DialogCreateInterContentRelation();
-                dialog.setFirst(content);
+                DialogCreateInterContentRelation dialog = new DialogCreateInterContentRelation(content);
+                dialog.setUser(user);
+                dialog.setVisible(true);
+            }
+        });
+        versionBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DialogAddNewContent dialog = new DialogAddNewContent(content, user);
+                dialog.setVisible(true);
+            }
+        });
+        cmtBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AddCommentDialog dialog = new AddCommentDialog(content, user);
+                dialog.setVisible(true);
+            }
+        });
+        evalBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ContentEvaluationDialog dialog = new ContentEvaluationDialog(content, user);
                 dialog.setVisible(true);
             }
         });

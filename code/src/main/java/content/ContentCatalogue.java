@@ -47,4 +47,8 @@ public class ContentCatalogue extends AbstractCatalogue {
         return commentRepository.getComments(search);
     }
 
+    public void addComment(Comment comment) {
+        commentRepository.save(comment);
+    }
+
 }

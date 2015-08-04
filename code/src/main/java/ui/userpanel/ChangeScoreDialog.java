@@ -1,19 +1,20 @@
 package ui.userpanel;
 
-import source.SourceCatalogue;
+import user.*;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.Date;
 
-public class CreateResourceDialog extends JDialog {
+public class ChangeScoreDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextField srcname;
-    private JComboBox category;
-    private JTextField path;
+    private JTextField score;
+    private JTextField reason;
+    private JTextField username;
 
-    public CreateResourceDialog() {
+    public ChangeScoreDialog() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -30,15 +31,13 @@ public class CreateResourceDialog extends JDialog {
             }
         });
 
-// call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 onCancel();
             }
         });
 
-// call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -47,12 +46,23 @@ public class CreateResourceDialog extends JDialog {
     }
 
     private void onOK() {
-        SourceCatalogue sourceCatalogue = new SourceCatalogue();
+        UserCatalogue userCatalogue = new UserCatalogue();
+        User user = userCatalogue.getUserByUsername(username.getText());
+        if (null == user) {
+            JOptionPane.showConfirmDialog(this, "این کاربر وجود ندارد.", "خطا", JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            UserActivityLog log = new UserActivityLog(user, ActivityType.CHANGE_SCORE, new Date(), reason.getText());
+            Employee employee = new Employee(user);
+            employee.setOverallScore(employee.getOverallScore() + Double.parseDouble(score.getText()));
+            userCatalogue.addUserActivity(log);
+            userCatalogue.editUser(employee);
+            JOptionPane.showConfirmDialog(this, "ثبت امتیاز با موفقیت انجام شد.", "پیام", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }
     }
 
     private void onCancel() {
-// addSource your code here if necessary
         dispose();
     }
-
 }

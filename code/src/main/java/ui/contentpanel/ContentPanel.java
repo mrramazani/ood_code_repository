@@ -6,6 +6,7 @@ import ui.contentpanel.DialogAddNewContent;
 import ui.contentpanel.DialogCreateInterContentRelation;
 import ui.contentpanel.DialogCreateKnowledgeRequirement;
 import ui.contentpanel.DialogSearchContent;
+import user.User;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
@@ -18,8 +19,16 @@ import java.awt.event.KeyEvent;
  * Created by hamid on 7/8/2015.
  */
 public class ContentPanel extends JFrame{
+
+    private User user;
+
     public ContentPanel()
     {
+        initUI();
+    }
+
+    public ContentPanel(User user) throws HeadlessException {
+        this.user = user;
         initUI();
     }
 
@@ -107,26 +116,10 @@ public class ContentPanel extends JFrame{
             }
         });
 
-        JMenuItem createInterContentRelation = new JMenuItem("ایجاد رابطه بین محتوایی", icon);
-        createInterContentRelation .addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                EventQueue.invokeLater(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        DialogCreateInterContentRelation dialog_icr = new DialogCreateInterContentRelation();
-                        dialog_icr.setVisible(true);
-                    }
-                });
-
-            }
-        });
-
         contentManagement.add(addContent);
         contentManagement.add(searchContent);
         contentManagement.add(createKnowledgeReq);
-        contentManagement.add(createInterContentRelation);
+//        contentManagement.add(createInterContentRelation);
 
         menubar.add(contentManagement);
 

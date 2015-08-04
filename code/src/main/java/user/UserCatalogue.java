@@ -17,6 +17,7 @@ public class UserCatalogue extends AbstractCatalogue{
     private UserRepository userRepository;
     private UserActivityRepository activityRepository;
 
+
     public UserCatalogue() {
         super();
         userRepository = new UserRepository(super.getMorphia(), super.getMongoClient());
@@ -30,12 +31,10 @@ public class UserCatalogue extends AbstractCatalogue{
         return true;
     }
 
-    // TODO
     public boolean logout(User user) {
         return true;
     }
 
-    // TODO
     public void addUser(User user) {
         User existingUser = userRepository.findByUsername(user.getUsername());
         if (null != existingUser)
@@ -43,17 +42,14 @@ public class UserCatalogue extends AbstractCatalogue{
         userRepository.save(user);
     }
 
-    // TODO
     public void editUser(User user) {
         userRepository.save(user);
     }
 
-    // TODO
     public void deleteUser(User user) {
         userRepository.delete(user);
     }
 
-    // TODO
     public List<User> list() {
         return users;
     }
@@ -66,6 +62,14 @@ public class UserCatalogue extends AbstractCatalogue{
     public List<UserActivityLog> getActivities(String username) {
         User user = userRepository.findByUsername(username);
         return activityRepository.getUserActivityForUser(user);
+    }
+
+    public void addUserActivity(UserActivityLog log) {
+        activityRepository.save(log);
+    }
+
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     public User authenticate(String username, String password) {

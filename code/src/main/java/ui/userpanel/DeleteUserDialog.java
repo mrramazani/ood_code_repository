@@ -1,29 +1,18 @@
-package ui.contentpanel;
+package ui.userpanel;
 
-import content.Content;
-import user.User;
+import user.*;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.Date;
 
-public class DialogCreateInterContentRelation extends JDialog {
+public class DeleteUserDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextField firstContent;
-    private JTextField secondContent;
-    private JComboBox comboBox1;
-    private Content first;
-    private Content second;
-    private User user;
+    private JTextField username;
 
-    public DialogCreateInterContentRelation() {
-        createUI();
-    }
-
-    private void createUI() {
-        setSize(400,600);
-        setTitle("ایجاد یک رابطه ی بین محتوایی");
+    public DeleteUserDialog() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -40,6 +29,7 @@ public class DialogCreateInterContentRelation extends JDialog {
             }
         });
 
+// call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -47,6 +37,7 @@ public class DialogCreateInterContentRelation extends JDialog {
             }
         });
 
+// call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -54,42 +45,22 @@ public class DialogCreateInterContentRelation extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    public DialogCreateInterContentRelation(Content first) {
-        this.first = first;
-        createUI();
-        firstContent.setText(first.getName());
-        firstContent.setEnabled(false);
-    }
-
-    public Content getFirst() {
-        return first;
-    }
-
-    public void setFirst(Content first) {
-        this.first = first;
-    }
-
-    public Content getSecond() {
-        return second;
-    }
-
-    public void setSecond(Content second) {
-        this.second = second;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     private void onOK() {
+        UserCatalogue userCatalogue = new UserCatalogue();
+        User user = userCatalogue.getUserByUsername(username.getText());
+        if (null == user) {
+            JOptionPane.showConfirmDialog(this, "این کاربر وجود ندارد.", "خطا", JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            userCatalogue.deleteUser(user);
+            JOptionPane.showConfirmDialog(this, "حذف  کاربر با موفقیت انجام شد.", "پیام", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }
         dispose();
     }
 
     private void onCancel() {
+// add your code here if necessary
         dispose();
     }
 }

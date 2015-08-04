@@ -28,6 +28,18 @@ public class Employee extends User {
 
     }
 
+    public Employee(User user) {
+        super();
+        setId(user.getId());
+        setEmail(user.getEmail());
+        setFirstName(user.getFirstName());
+        setLastName(user.getLastName());
+        setUsername(user.getUsername());
+        setPassword(user.getPassword());
+        setAdmin(user.isAdmin());
+        setExpertise(user.getExpertise());
+    }
+
     public void changeScore(double score) {
         overallScore = score;
     }

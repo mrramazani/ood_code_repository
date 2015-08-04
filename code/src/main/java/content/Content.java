@@ -19,7 +19,7 @@ public class Content {
     private Date date;
     private String text;
     private List<String> tags = new ArrayList<String>();
-    private List<String> files = new ArrayList<String>();
+    private String files;
     private String type;
     private List<String> comments = new ArrayList<String>();
     private List<Double> ratings = new ArrayList<Double>();
@@ -78,11 +78,11 @@ public class Content {
         this.tags = tags;
     }
 
-    public List<String> getFiles() {
+    public String getFiles() {
         return files;
     }
 
-    public void setFiles(List<String> files) {
+    public void setFiles(String files) {
         this.files = files;
     }
 

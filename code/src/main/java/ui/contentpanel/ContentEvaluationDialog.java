@@ -6,24 +6,29 @@ import user.User;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class DialogCreateInterContentRelation extends JDialog {
+public class ContentEvaluationDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextField firstContent;
-    private JTextField secondContent;
-    private JComboBox comboBox1;
-    private Content first;
-    private Content second;
+    private JLabel contLbl;
+    private JTextField textField2;
+    private JLabel nameLbl;
+    private JLabel msgLabel;
+    private Content content;
     private User user;
 
-    public DialogCreateInterContentRelation() {
+    public ContentEvaluationDialog() {
         createUI();
     }
 
+    public ContentEvaluationDialog(Content content, User user) {
+        this.content = content;
+        this.user = user;
+        createUI();
+        nameLbl.setText(content.getName());
+    }
+
     private void createUI() {
-        setSize(400,600);
-        setTitle("ایجاد یک رابطه ی بین محتوایی");
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -40,7 +45,7 @@ public class DialogCreateInterContentRelation extends JDialog {
             }
         });
 
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 onCancel();
@@ -54,29 +59,6 @@ public class DialogCreateInterContentRelation extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    public DialogCreateInterContentRelation(Content first) {
-        this.first = first;
-        createUI();
-        firstContent.setText(first.getName());
-        firstContent.setEnabled(false);
-    }
-
-    public Content getFirst() {
-        return first;
-    }
-
-    public void setFirst(Content first) {
-        this.first = first;
-    }
-
-    public Content getSecond() {
-        return second;
-    }
-
-    public void setSecond(Content second) {
-        this.second = second;
-    }
-
     public User getUser() {
         return user;
     }
@@ -86,6 +68,7 @@ public class DialogCreateInterContentRelation extends JDialog {
     }
 
     private void onOK() {
+        msgLabel.setText("امتیاز شما با موفقیت ثبت شد.");
         dispose();
     }
 

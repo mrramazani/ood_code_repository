@@ -68,6 +68,20 @@ public class AdminPanel extends MainPanel{
 
             }
         });
+        JMenuItem changeScore = new JMenuItem("تغییر امتیاز کارمند");
+        changeScore.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                EventQueue.invokeLater(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        ChangeScoreDialog dialog = new ChangeScoreDialog();
+                        dialog.setVisible(true);
+                    }
+                });
+            }
+        });
         adminMenu.add(addUser);
         adminMenu.add(deleteUser);
 

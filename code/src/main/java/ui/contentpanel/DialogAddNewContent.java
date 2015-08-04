@@ -26,18 +26,34 @@ public class DialogAddNewContent extends JDialog {
     private JLabel textLabel;
     private JLabel filenameLabel;
     private JLabel labelsLabel;
+    private Content content;
+    private User user;
 
 
     private ContentCatalogue contentCatalogue;
 
     public DialogAddNewContent() {
 
-//        Set classesToMap = new HashSet();
-//        classesToMap.addSource(Content.class);
-//        classesToMap.addSource(User.class);
-//        classesToMap.addSource(Comment.class);
-//        classesToMap.addSource(Relationship.class);
-//        morphia = new Morphia(classesToMap);
+        createUI();
+    }
+
+    public DialogAddNewContent(Content content, User user) {
+        this.content = content;
+        this.user = user;
+        createUI();
+        TitleTextField.setText(content.getName());
+        TitleTextField.setEnabled(false);
+        TextTextArea.setText(content.getText());
+        FilenameTextField.setText(content.getFiles());
+        StringBuilder builder = new StringBuilder();
+        for (String tag: content.getTags()) {
+            builder.append(tag).append(",");
+        }
+        String tags = builder.toString();
+        LabelsTextField.setText(tags);
+    }
+
+    private void createUI() {
         contentCatalogue = new ContentCatalogue();
         setSize(400, 600);
         setTitle("افزودن محتوای جدید");
@@ -73,16 +89,25 @@ public class DialogAddNewContent extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     private void addButtonAction() {
 
-        Content c = new Content();
-        c.setDate(new Date());
-        c.setName(TitleTextField.getText());
-        c.setText(TextTextArea.getText());
-        c.setFiles(Collections.<String>singletonList(FilenameTextField.getText()));
+        if (null == content)
+            content = new Content();
+        content.setDate(new Date());
+        content.setName(TitleTextField.getText());
+        content.setText(TextTextArea.getText());
+        content.setFiles(FilenameTextField.getText());
         String[] tags = LabelsTextField.getText().split(",");
-        c.setTags(Arrays.asList(tags));
-        contentCatalogue.addContent(c);
+        content.setTags(Arrays.asList(tags));
+        contentCatalogue.addContent(content);
     }
 
     private void onCancel() {

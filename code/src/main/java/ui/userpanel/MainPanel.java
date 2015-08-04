@@ -98,7 +98,7 @@ public class MainPanel extends JFrame {
 
                     @Override
                     public void run() {
-                        ContentPanel mainPage = new ContentPanel();
+                        ContentPanel mainPage = new ContentPanel(currentUser);
                         mainPage.setVisible(true);
                     }
                 });
