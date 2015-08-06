@@ -3,6 +3,7 @@ package source;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Indexed;
 
 import java.util.List;
 
@@ -14,12 +15,12 @@ import java.util.List;
 public class KnowledgeRequirement {
     @Id
     private ObjectId id;
-    private String title;
+    private String name;
     private String text;
     private List<String> tags;
 
-    public KnowledgeRequirement(String title, String text, List<String> tags) {
-        this.title = title;
+    public KnowledgeRequirement(String name, String text, List<String> tags) {
+        this.name = name;
         this.text = text;
         this.tags = tags;
     }
@@ -32,12 +33,12 @@ public class KnowledgeRequirement {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getText() {

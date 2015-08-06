@@ -21,31 +21,8 @@ public class Content {
     private List<String> tags = new ArrayList<String>();
     private String files;
     private String type;
-    private List<String> comments = new ArrayList<String>();
     private List<Double> ratings = new ArrayList<Double>();
     private double averageRating;
-    private int numOfRatings;
-
-
-    public void addTag(String keyword) {
-    }
-
-
-    public void change() {
-        // TODO: use builder pattern
-    }
-
-    public void addRelationship(Content other, String type, String attribute) {
-        // TODO: make it a service that interacts with database;
-    }
-
-    public void addComment() {
-
-    }
-
-    public void rate() {
-
-    }
 
     public String getName() {
         return name;
@@ -95,13 +72,6 @@ public class Content {
         this.type = type;
     }
 
-    public List<String> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<String> comments) {
-        this.comments = comments;
-    }
 
     public List<Double> getRatings() {
         return ratings;
@@ -117,14 +87,6 @@ public class Content {
 
     public void setAverageRating(double averageRating) {
         this.averageRating = averageRating;
-    }
-
-    public int getNumOfRatings() {
-        return numOfRatings;
-    }
-
-    public void setNumOfRatings(int numOfRatings) {
-        this.numOfRatings = numOfRatings;
     }
 
     public ObjectId getId() {

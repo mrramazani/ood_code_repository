@@ -35,7 +35,7 @@ public class ViewContentDialog extends JFrame {
     private Content content;
     private User user;
 
-    public ViewContentDialog(Content contentIn, User userIn) {
+    public ViewContentDialog(final Content contentIn, User userIn) {
         setContentPane(contentPane);
 //        setModal(true);
         this.content = contentIn;
@@ -92,7 +92,7 @@ public class ViewContentDialog extends JFrame {
         evalBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ContentEvaluationDialog dialog = new ContentEvaluationDialog(content, user);
+                ChangeContentScoreDialog dialog = new ChangeContentScoreDialog(user, content);
                 dialog.setVisible(true);
             }
         });

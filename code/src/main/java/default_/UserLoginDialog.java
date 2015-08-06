@@ -69,7 +69,7 @@ public class UserLoginDialog extends JFrame {
         }
         else {
             // show error dialog
-            getContentPane().add(new TextArea("Authentication Error"));
+            JOptionPane.showMessageDialog(this, "نام کاربری یا رمز عبور اشتباه است.");
 
         }
     }

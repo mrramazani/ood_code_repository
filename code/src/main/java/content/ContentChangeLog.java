@@ -20,6 +20,7 @@ public class ContentChangeLog {
     private Content content;
     private ChangeType changeType;
     private Date date;
+    @Reference
     private User user;
 
     public ContentChangeLog(Content content, ChangeType changeType, Date date, User user) {
@@ -27,6 +28,9 @@ public class ContentChangeLog {
         this.changeType = changeType;
         this.date = date;
         this.user = user;
+    }
+
+    public ContentChangeLog() {
     }
 
     public ChangeType getChangeType() {

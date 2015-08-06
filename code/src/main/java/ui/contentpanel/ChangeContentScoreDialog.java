@@ -10,11 +10,13 @@ import user.UserCatalogue;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.Date;
 
 public class ChangeContentScoreDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
+    private JTextField score;
     private User user;
     private Content content;
 
@@ -41,7 +43,6 @@ public class ChangeContentScoreDialog extends JDialog {
             }
         });
 
-// call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -49,7 +50,6 @@ public class ChangeContentScoreDialog extends JDialog {
             }
         });
 
-// call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -58,7 +58,15 @@ public class ChangeContentScoreDialog extends JDialog {
     }
 
     private void onOK() {
-
+        UserCatalogue userCatalogue = new UserCatalogue();
+        ContentCatalogue contentCatalogue = new ContentCatalogue();
+        double temp = content.getAverageRating() * content.getRatings().size();
+        content.getRatings().add(Double.parseDouble(score.getText()));
+        content.setAverageRating((temp + Double.parseDouble(score.getText())) / content.getRatings().size());
+        contentCatalogue.updateContent(content);
+        userCatalogue.addUserActivity(new UserActivityLog(user, ActivityType.EVALUATE, new Date(), "ثبت امتیاز ارزیابی محتوا: " + content.getName()));
+        JOptionPane.showConfirmDialog(this, "امتیاز شما با موفقیت ثبت شد.");
+        dispose();
         dispose();
     }
 
