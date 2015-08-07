@@ -92,6 +92,24 @@ public class MainPanel extends JFrame {
         });
         userMng.add(editProfile);
 
+        JMenuItem viewScores = new JMenuItem("مشاهده ی ریز امتیازات");
+        viewScores.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EventQueue.invokeLater(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        //TODO
+//                        CreateUserDialog dialog = new CreateUserDialog();
+//                        dialog.initFields(currentUser, true);
+//                        dialog.setVisible(true);
+                    }
+                });
+            }
+        });
+        userMng.add(viewScores);
+
         menubar.add(userMng);
 
         JMenuItem contentPanel = new JMenuItem("ورورد به پنل مدیریت محتوا");

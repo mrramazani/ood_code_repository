@@ -101,7 +101,7 @@ public class AdminPanel extends MainPanel{
             }
         });
         final JMenuItem categorizeSource = new JMenuItem("تغییر دسته بندی منبع");
-        addSource.addActionListener(new ActionListener() {
+        categorizeSource.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
                 EventQueue.invokeLater(new Runnable() {
@@ -112,17 +112,65 @@ public class AdminPanel extends MainPanel{
                         categoryDialog.setVisible(true);
                     }
                 });
-
-
             }
         });
+
+        final JMenuItem categorizeContent = new JMenuItem("تغییر دسته بندی محتوا در منبع");
+        categorizeContent.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                EventQueue.invokeLater(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        //TODO
+//                        ChangeContentCategoryDialog categoryDialog = new ChangeContentCategoryDialog();
+//                        categoryDialog.setVisible(true);
+                    }
+                });
+            }
+        });
+
+        final JMenuItem assignRole = new JMenuItem("انتصاب نقش");
+        assignRole.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                EventQueue.invokeLater(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        //TODO
+//                        ChangeContentCategoryDialog categoryDialog = new ChangeContentCategoryDialog();
+//                        categoryDialog.setVisible(true);
+                    }
+                });
+            }
+        });
+
+        final JMenuItem assignRaiseRate = new JMenuItem("تعیین میزان افزایش حقوق کاربر");
+        assignRaiseRate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                EventQueue.invokeLater(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        //TODO
+//                        ChangeContentCategoryDialog categoryDialog = new ChangeContentCategoryDialog();
+//                        categoryDialog.setVisible(true);
+                    }
+                });
+            }
+        });
+
         sourceMenu.add(addSource);
         sourceMenu.add(categorizeSource);
+        sourceMenu.add(categorizeContent);
+        adminMenu.add(assignRole);
+        adminMenu.add(assignRaiseRate);
+
         getMenubar().add(adminMenu);
         getMenubar().add(sourceMenu);
     }
-
-
-
 
 }
