@@ -64,6 +64,11 @@ public class UserCatalogue extends AbstractCatalogue{
         return activityRepository.getUserActivityForUser(user);
     }
 
+    public List<UserActivityLog> getSpecializedLog(String username, ActivityType type) {
+        final User userByUsername = getUserByUsername(username);
+        return activityRepository.getUserActivityForUserByType(userByUsername, type);
+    }
+
     public void addUserActivity(UserActivityLog log) {
         activityRepository.save(log);
     }

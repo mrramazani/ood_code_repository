@@ -39,7 +39,7 @@ public class SourceCatalogue extends AbstractCatalogue{
     }
 
     public List<Source> search(String keyword) {
-        return sourceRepository.findByName(keyword);
+        return sourceRepository.search(keyword);
     }
 
 }

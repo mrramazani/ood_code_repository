@@ -2,14 +2,9 @@ package ui.contentpanel; /**
  * Created by hamid on 7/8/2015.
  */
 
-import ui.contentpanel.DialogAddNewContent;
-import ui.contentpanel.DialogCreateInterContentRelation;
-import ui.contentpanel.DialogCreateKnowledgeRequirement;
-import ui.contentpanel.DialogSearchContent;
 import user.User;
 
 import javax.swing.*;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

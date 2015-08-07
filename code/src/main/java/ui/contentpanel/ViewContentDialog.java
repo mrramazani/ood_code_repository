@@ -70,7 +70,7 @@ public class ViewContentDialog extends JFrame {
         relationBtn.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DialogCreateInterContentRelation dialog = new DialogCreateInterContentRelation(content);
+                AddRelationDialog dialog = new AddRelationDialog(content, user);
                 dialog.setUser(user);
                 dialog.setVisible(true);
             }
@@ -92,7 +92,7 @@ public class ViewContentDialog extends JFrame {
         evalBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ChangeContentScoreDialog dialog = new ChangeContentScoreDialog(user, content);
+                EvaluateContentDialog dialog = new EvaluateContentDialog(user, content);
                 dialog.setVisible(true);
             }
         });

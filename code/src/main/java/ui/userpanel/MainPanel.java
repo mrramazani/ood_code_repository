@@ -3,6 +3,7 @@ package ui.userpanel;
 import default_.UserLoginDialog;
 import ui.contentpanel.ContentPanel;
 import user.User;
+import user.UserCatalogue;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,6 +34,8 @@ public class MainPanel extends JFrame {
 
     public void logout() {
         this.setVisible(false);
+        UserCatalogue userCatalogue = new UserCatalogue();
+        userCatalogue.logout(currentUser);
         UserLoginDialog loginDialog = new UserLoginDialog();
         loginDialog.setVisible(true);
     }
@@ -63,7 +66,7 @@ public class MainPanel extends JFrame {
 
                     @Override
                     public void run() {
-                        AddUserDialog dialog = new AddUserDialog();
+                        CreateUserDialog dialog = new CreateUserDialog();
                         dialog.initFields(currentUser, false);
                         dialog.setVisible(true);
                     }
@@ -80,7 +83,7 @@ public class MainPanel extends JFrame {
 
                     @Override
                     public void run() {
-                        AddUserDialog dialog = new AddUserDialog();
+                        CreateUserDialog dialog = new CreateUserDialog();
                         dialog.initFields(currentUser, true);
                         dialog.setVisible(true);
                     }

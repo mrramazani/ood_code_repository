@@ -19,7 +19,7 @@ public class SourceRepository extends BasicDAO<Source, String> {
         super(mongoClient, morphia, dbName);
     }
 
-    public List<Source> findByName(String name) {
+    public List<Source> search(String name) {
         Query<Source> query = createQuery().field("name").equal(name);
         return find(query).asList();
     }

@@ -17,14 +17,12 @@ public class Relationship {
     private Content firstContent;
     @Reference
     private Content secondContent;
-    private String type;
-    private String attribute;
+    private RelationShipType type;
 
-    public Relationship(Content firstContent, Content secondContent, String type, String attribute) {
+    public Relationship(Content firstContent, Content secondContent, RelationShipType type) {
         this.firstContent = firstContent;
         this.secondContent = secondContent;
         this.type = type;
-        this.attribute = attribute;
     }
 
     public ObjectId getId() {
@@ -47,19 +45,12 @@ public class Relationship {
         this.secondContent = secondContent;
     }
 
-    public String getType() {
+    public RelationShipType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(RelationShipType type) {
         this.type = type;
     }
 
-    public String getAttribute() {
-        return attribute;
-    }
-
-    public void setAttribute(String attribute) {
-        this.attribute = attribute;
-    }
 }

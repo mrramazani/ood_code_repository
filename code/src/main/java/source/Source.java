@@ -4,6 +4,8 @@ import content.Content;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Reference;
+import user.User;
 
 import java.util.List;
 
@@ -18,13 +20,14 @@ public class Source {
     private String name;
     private String address;
     private String category;
-//    TODO: do we have contents field?
-//    private List<Content> contents;
+    @Reference
+    private User creator;
 
-    public Source(String name, String address, String category) {
+    public Source(String name, String address, String category, User creator) {
         this.name = name;
         this.address = address;
         this.category = category;
+        this.creator = creator;
     }
 
     public Source() {
@@ -61,4 +64,13 @@ public class Source {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
 }

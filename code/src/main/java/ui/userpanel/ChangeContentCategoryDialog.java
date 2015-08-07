@@ -1,30 +1,23 @@
-package default_;
-
-import ui.userpanel.AdminPanel;
-import ui.userpanel.UserPanel;
-import user.User;
-import user.UserCatalogue;
+package ui.userpanel;
 
 import javax.swing.*;
 import java.awt.event.*;
 
-public class UserLoginDialog extends JFrame {
+public class ChangeContentCategoryDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
     private JTextField textField1;
-    private JPasswordField passwordField1;
+    private JTextField textField2;
 
-
-    public UserLoginDialog() {
+    public ChangeContentCategoryDialog() {
         setContentPane(contentPane);
-//        setModal(true);
-        setSize(400, 400);
+        setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                login();
+                onOK();
             }
         });
 
@@ -35,7 +28,7 @@ public class UserLoginDialog extends JFrame {
         });
 
 // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 onCancel();
@@ -50,31 +43,13 @@ public class UserLoginDialog extends JFrame {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void login() {
+    private void onOK() {
 // addSource your code here
-        UserCatalogue userCatalogue = new UserCatalogue();
-        User authenticatedUser = userCatalogue.authenticate(textField1.getText(), passwordField1.getText());
-        if (authenticatedUser != null) {
-            if (!authenticatedUser.isAdmin()) {
-                UserPanel userPanel = new UserPanel(authenticatedUser);
-                userPanel.setVisible(true);
-            }
-            else {
-                AdminPanel adminPanel = new AdminPanel(authenticatedUser);
-                adminPanel.setVisible(true);
-            }
-            this.setVisible(false);
-        }
-        else {
-            // show error dialog
-            JOptionPane.showMessageDialog(this, "نام کاربری یا رمز عبور اشتباه است.");
-
-        }
+        dispose();
     }
 
     private void onCancel() {
 // addSource your code here if necessary
         dispose();
     }
-
-    }
+}

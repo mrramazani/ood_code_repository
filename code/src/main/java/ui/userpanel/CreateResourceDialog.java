@@ -2,6 +2,7 @@ package ui.userpanel;
 
 import source.Source;
 import source.SourceCatalogue;
+import user.User;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -15,8 +16,10 @@ public class CreateResourceDialog extends JDialog {
     private JComboBox category;
     private JTextField path;
     private JButton pathBtn;
+    private User user;
 
-    public CreateResourceDialog() {
+    public CreateResourceDialog(User user) {
+        this.user = user;
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -64,7 +67,7 @@ public class CreateResourceDialog extends JDialog {
 
     private void onOK() {
         SourceCatalogue sourceCatalogue = new SourceCatalogue();
-        Source src = new Source(srcname.getText(), path.getText(), category.getSelectedItem().toString());
+        Source src = new Source(srcname.getText(), path.getText(), category.getSelectedItem().toString(), user);
         sourceCatalogue.addSource(src);
         JOptionPane.showConfirmDialog(this, "منبع با موفقیت ایجاد شد.", "", JOptionPane.INFORMATION_MESSAGE);
         dispose();

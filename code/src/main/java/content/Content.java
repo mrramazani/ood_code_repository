@@ -3,6 +3,7 @@ package content;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Indexed;
+import source.Source;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,9 +19,10 @@ public class Content {
     private String name;
     private Date date;
     private String text;
+    private Source source;
     private List<String> tags = new ArrayList<String>();
     private String files;
-    private String type;
+    private String category;
     private List<Double> ratings = new ArrayList<Double>();
     private double averageRating;
 
@@ -64,12 +66,12 @@ public class Content {
         this.files = files;
     }
 
-    public String getType() {
-        return type;
+    public String getCategory() {
+        return category;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setCategory(String type) {
+        this.category = type;
     }
 
 
@@ -95,5 +97,13 @@ public class Content {
 
     public void setId(ObjectId id) {
         this.id = id;
+    }
+
+    public Source getSource() {
+        return source;
+    }
+
+    public void setSource(Source source) {
+        this.source = source;
     }
 }

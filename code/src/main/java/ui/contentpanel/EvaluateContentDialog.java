@@ -1,6 +1,7 @@
 package ui.contentpanel;
 
-import content.*;
+import content.Content;
+import content.ContentCatalogue;
 import user.ActivityType;
 import user.User;
 import user.UserActivityLog;
@@ -10,23 +11,18 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.Date;
 
-public class AddCommentDialog extends JDialog {
+public class EvaluateContentDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JLabel label;
-    private JTextArea comment;
-    private Content content;
+    private JTextField score;
     private User user;
+    private Content content;
 
-    public AddCommentDialog() {
+    public EvaluateContentDialog(User user, Content content) {
         initUI();
-    }
-
-    public AddCommentDialog(Content content, User user) {
-        this.content = content;
         this.user = user;
-        initUI();
+        this.content = content;
     }
 
     private void initUI() {
@@ -36,7 +32,7 @@ public class AddCommentDialog extends JDialog {
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                addComment();
+                onOK();
             }
         });
 
@@ -60,29 +56,16 @@ public class AddCommentDialog extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    public Content getContent() {
-        return content;
-    }
-
-    public void setContent(Content content) {
-        this.content = content;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    private void addComment() {
-        Comment cmt = new Comment(comment.getText(), user, new Date(), content);
-        ContentCatalogue contentCatalogue = new ContentCatalogue();
-        contentCatalogue.addComment(cmt);
+    private void onOK() {
         UserCatalogue userCatalogue = new UserCatalogue();
-        userCatalogue.addUserActivity(new UserActivityLog(user, ActivityType.COMMENT, new Date(), "ثبت نظر برای محتوای " + content.getName()));
-        contentCatalogue.log(new ContentChangeLog(content, ChangeType.COMMENT, new Date(), user));
+        ContentCatalogue contentCatalogue = new ContentCatalogue();
+        double temp = content.getAverageRating() * content.getRatings().size();
+        content.getRatings().add(Double.parseDouble(score.getText()));
+        content.setAverageRating((temp + Double.parseDouble(score.getText())) / content.getRatings().size());
+        contentCatalogue.editContent(content);
+        userCatalogue.addUserActivity(new UserActivityLog(user, ActivityType.EVALUATE, new Date(), "ثبت امتیاز ارزیابی محتوا: " + content.getName()));
+        JOptionPane.showConfirmDialog(this, "امتیاز شما با موفقیت ثبت شد.");
+        dispose();
         dispose();
     }
 

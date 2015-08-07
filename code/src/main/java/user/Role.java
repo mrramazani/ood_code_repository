@@ -5,7 +5,6 @@ package user;
  *         Created on 7/27/2015
  */
 public enum  Role {
-    USER,
-    ADMIN,
-    SYSADMIN
+    REGULAR,
+    MODERATOR,
 }

@@ -15,13 +15,13 @@ public class DialogSearchContent extends JDialog {
     private User user;
 
     public DialogSearchContent(User user) {
-        createUI();
+        initUI();
         this.user = user;
     }
 
 
 
-    private void createUI() {
+    private void initUI() {
         setSize(400, 200);
         setTitle("جستجوی محتوا");
         setContentPane(contentPane);
@@ -30,7 +30,7 @@ public class DialogSearchContent extends JDialog {
 
         buttonSearch.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                search();
             }
         });
 
@@ -56,7 +56,7 @@ public class DialogSearchContent extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK() {
+    private void search() {
         ContentCatalogue catalogue = new ContentCatalogue();
         Content content = catalogue.search(searchField.getText());
         if (null != content) {

@@ -63,7 +63,7 @@ public class ChangeContentScoreDialog extends JDialog {
         double temp = content.getAverageRating() * content.getRatings().size();
         content.getRatings().add(Double.parseDouble(score.getText()));
         content.setAverageRating((temp + Double.parseDouble(score.getText())) / content.getRatings().size());
-        contentCatalogue.updateContent(content);
+        contentCatalogue.editContent(content);
         userCatalogue.addUserActivity(new UserActivityLog(user, ActivityType.EVALUATE, new Date(), "ثبت امتیاز ارزیابی محتوا: " + content.getName()));
         JOptionPane.showConfirmDialog(this, "امتیاز شما با موفقیت ثبت شد.");
         dispose();

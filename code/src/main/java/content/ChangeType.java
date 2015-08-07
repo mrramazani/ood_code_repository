@@ -5,7 +5,7 @@ package content;
  *         Created on 7/31/2015
  */
 public enum ChangeType {
-    ADD,
+    CREATE,
     NEW_VERSION,
     UPDATE,
     DELETE,

@@ -1,6 +1,5 @@
 package ui.userpanel;
 
-import user.SysAdmin;
 import user.User;
 
 import javax.swing.*;
@@ -43,7 +42,7 @@ public class AdminPanel extends MainPanel{
 
                     @Override
                     public void run() {
-                        AddUserDialog anc = new AddUserDialog();
+                        CreateUserDialog anc = new CreateUserDialog();
                         anc.setVisible(true);
                     }
                 });
@@ -76,7 +75,7 @@ public class AdminPanel extends MainPanel{
 
                     @Override
                     public void run() {
-                        ChangeScoreDialog dialog = new ChangeScoreDialog();
+                        ChangeUserScoreDialog dialog = new ChangeUserScoreDialog();
                         dialog.setVisible(true);
                     }
                 });
@@ -93,7 +92,7 @@ public class AdminPanel extends MainPanel{
 
                     @Override
                     public void run() {
-                        CreateResourceDialog resourceDialog = new CreateResourceDialog();
+                        CreateResourceDialog resourceDialog = new CreateResourceDialog(getCurrentUser());
                         resourceDialog.setVisible(true);
                     }
                 });
@@ -109,7 +108,7 @@ public class AdminPanel extends MainPanel{
 
                     @Override
                     public void run() {
-                        ChangeResourceCategoryDialog categoryDialog = new ChangeResourceCategoryDialog();
+                        ChangeContentCategoryDialog categoryDialog = new ChangeContentCategoryDialog();
                         categoryDialog.setVisible(true);
                     }
                 });

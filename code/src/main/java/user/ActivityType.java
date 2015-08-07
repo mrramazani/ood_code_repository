@@ -11,6 +11,7 @@ public enum ActivityType {
     COMMENT,
     NEW_CONTENT_VERSION,
     CHANGE_SCORE,
-    EVALUATE
+    EVALUATE,
+    VIEW
 
 }

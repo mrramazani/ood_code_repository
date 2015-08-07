@@ -1,11 +1,11 @@
 package ui.contentpanel;
 
 import com.mongodb.MongoClient;
-import content.Comment;
 import content.Content;
 import content.ContentCatalogue;
-import content.Relationship;
 import org.mongodb.morphia.Morphia;
+import source.Source;
+import source.SourceCatalogue;
 import user.ActivityType;
 import user.User;
 import user.UserActivityLog;
@@ -13,7 +13,6 @@ import user.UserCatalogue;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.net.UnknownHostException;
 import java.util.*;
 
 //@Service
@@ -29,6 +28,7 @@ public class DialogAddNewContent extends JDialog {
     private JLabel textLabel;
     private JLabel filenameLabel;
     private JLabel labelsLabel;
+    private JTextField srcField;
     private Content content;
     private User user;
 
@@ -37,13 +37,13 @@ public class DialogAddNewContent extends JDialog {
 
     public DialogAddNewContent() {
 
-        createUI();
+        initUI();
     }
 
     public DialogAddNewContent(Content content, User user) {
         this.content = content;
         this.user = user;
-        createUI();
+        initUI();
         TitleTextField.setText(content.getName());
         TitleTextField.setEnabled(false);
         TextTextArea.setText(content.getText());
@@ -56,7 +56,7 @@ public class DialogAddNewContent extends JDialog {
         LabelsTextField.setText(tags);
     }
 
-    private void createUI() {
+    private void initUI() {
         contentCatalogue = new ContentCatalogue();
         setSize(400, 600);
         setTitle("افزودن محتوای جدید");
@@ -104,10 +104,15 @@ public class DialogAddNewContent extends JDialog {
 
         if (null == content)
             content = new Content();
+        SourceCatalogue sourceCatalogue = new SourceCatalogue();
+        List<Source> sources = sourceCatalogue.search(srcField.getText());
+        if (sources.size() == 0)
+            JOptionPane.showMessageDialog(this, "منبع با این نام موجود نمی باشد.");
         content.setDate(new Date());
         content.setName(TitleTextField.getText());
         content.setText(TextTextArea.getText());
         content.setFiles(FilenameTextField.getText());
+        content.setSource(sources.get(0));
         String[] tags = LabelsTextField.getText().split(",");
         content.setTags(Arrays.asList(tags));
         contentCatalogue.addContent(content);
