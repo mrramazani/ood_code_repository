@@ -131,6 +131,22 @@ public class AdminPanel extends MainPanel{
             }
         });
 
+        final JMenuItem contentChange = new JMenuItem("گرفتن گزارش از تغییرات محتوا");
+        contentChange.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                EventQueue.invokeLater(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        //TODO
+//                        ChangeContentCategoryDialog categoryDialog = new ChangeContentCategoryDialog();
+//                        categoryDialog.setVisible(true);
+                    }
+                });
+            }
+        });
+
         final JMenuItem assignRole = new JMenuItem("انتصاب نقش");
         assignRole.addActionListener(new ActionListener() {
             @Override
@@ -166,6 +182,7 @@ public class AdminPanel extends MainPanel{
         sourceMenu.add(addSource);
         sourceMenu.add(categorizeSource);
         sourceMenu.add(categorizeContent);
+        sourceMenu.add(contentChange);
         adminMenu.add(assignRole);
         adminMenu.add(assignRaiseRate);
 
