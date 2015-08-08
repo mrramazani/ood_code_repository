@@ -61,17 +61,17 @@ public class CreateUserDialog extends JFrame {
        emailField.setText(user.getEmail());
        emailField.setEnabled(editable);
        nameField.setText(user.getFirstName());
-       nameField.setEnabled(editable);
+       nameField.setEnabled(false);
        lastNameField.setText(user.getLastName());
-       lastNameField.setEnabled(editable);
+       lastNameField.setEnabled(false);
        passwordField.setText(user.getPassword());
        passwordField.setEnabled(editable);
        usernameField.setText(user.getUsername());
-       usernameField.setEnabled(editable);
+       usernameField.setEnabled(false);
        isAdmin.setSelected(user.isAdmin());
-       isAdmin.setEnabled(editable);
+       isAdmin.setEnabled(false);
        expertiseField.setText(user.getExpertise().toString());
-       expertiseField.setEnabled(editable);
+       expertiseField.setEnabled(true);
    }
     private void onOK() {
         User user = new User(usernameField.getText(), passwordField.getText(), emailField.getText(),

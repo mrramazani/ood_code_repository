@@ -13,7 +13,6 @@ public class CreateResourceDialog extends JDialog {
     private JButton buttonOK;
     private JButton buttonCancel;
     private JTextField srcname;
-    private JComboBox category;
     private JTextField path;
     private JButton pathBtn;
     private User user;
@@ -23,8 +22,6 @@ public class CreateResourceDialog extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-        category.addItem("فارسی");
-        category.addItem("لاتین");
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
@@ -67,7 +64,7 @@ public class CreateResourceDialog extends JDialog {
 
     private void onOK() {
         SourceCatalogue sourceCatalogue = new SourceCatalogue();
-        Source src = new Source(srcname.getText(), path.getText(), category.getSelectedItem().toString(), user);
+        Source src = new Source(srcname.getText(), path.getText(), user);
         sourceCatalogue.addSource(src);
         JOptionPane.showConfirmDialog(this, "منبع با موفقیت ایجاد شد.", "", JOptionPane.INFORMATION_MESSAGE);
         dispose();

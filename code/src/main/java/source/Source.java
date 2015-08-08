@@ -19,14 +19,12 @@ public class Source {
     private ObjectId id;
     private String name;
     private String address;
-    private String category;
     @Reference
     private User creator;
 
-    public Source(String name, String address, String category, User creator) {
+    public Source(String name, String address, User creator) {
         this.name = name;
         this.address = address;
-        this.category = category;
         this.creator = creator;
     }
 
@@ -55,14 +53,6 @@ public class Source {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public User getCreator() {

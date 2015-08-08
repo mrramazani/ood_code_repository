@@ -49,7 +49,7 @@ public class ChangeScoreDialog extends JDialog {
         UserCatalogue userCatalogue = new UserCatalogue();
         User user = userCatalogue.getUserByUsername(username.getText());
         if (null == user) {
-            JOptionPane.showConfirmDialog(this, "این کاربر وجود ندارد.", "خطا", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "این کاربر وجود ندارد.");
         }
         else {
             UserActivityLog log = new UserActivityLog(user, ActivityType.CHANGE_SCORE, new Date(), "تغییر امتیاز به علت:"
@@ -58,7 +58,7 @@ public class ChangeScoreDialog extends JDialog {
             employee.setOverallScore(employee.getOverallScore() + Double.parseDouble(score.getText()));
             userCatalogue.addUserActivity(log);
             userCatalogue.editUser(employee);
-            JOptionPane.showConfirmDialog(this, "ثبت امتیاز با موفقیت انجام شد.", "پیام", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "ثبت امتیاز با موفقیت انجام شد.");
             dispose();
         }
     }

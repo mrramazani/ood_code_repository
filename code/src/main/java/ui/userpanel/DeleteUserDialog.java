@@ -49,11 +49,11 @@ public class DeleteUserDialog extends JDialog {
         UserCatalogue userCatalogue = new UserCatalogue();
         User user = userCatalogue.getUserByUsername(username.getText());
         if (null == user) {
-            JOptionPane.showConfirmDialog(this, "این کاربر وجود ندارد.", "خطا", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "این کاربر وجود ندارد.", "خطا", JOptionPane.ERROR_MESSAGE);
         }
         else {
             userCatalogue.deleteUser(user);
-            JOptionPane.showConfirmDialog(this, "حذف  کاربر با موفقیت انجام شد.", "پیام", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "حذف  کاربر با موفقیت انجام شد.", "پیام", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         }
         dispose();

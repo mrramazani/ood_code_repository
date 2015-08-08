@@ -49,7 +49,7 @@ public class AdminPanel extends MainPanel{
             }
         });
 
-        JMenuItem deleteUser = new JMenuItem("حذف کاربر");
+        final JMenuItem deleteUser = new JMenuItem("حذف کاربر");
         deleteUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
@@ -59,8 +59,8 @@ public class AdminPanel extends MainPanel{
                     public void run() {
                         // TODO
 
-//                        DialogSearchContent sc = new DialogSearchContent();
-//                        sc.setVisible(true);
+                        DeleteUserDialog deleteUserDialog = new DeleteUserDialog();
+                        deleteUserDialog.setVisible(true);
                     }
                 });
 
@@ -100,20 +100,20 @@ public class AdminPanel extends MainPanel{
 
             }
         });
-        final JMenuItem categorizeSource = new JMenuItem("تغییر دسته بندی منبع");
-        categorizeSource.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                EventQueue.invokeLater(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        ChangeContentCategoryDialog categoryDialog = new ChangeContentCategoryDialog();
-                        categoryDialog.setVisible(true);
-                    }
-                });
-            }
-        });
+//        final JMenuItem categorizeSource = new JMenuItem("تغییر دسته بندی منبع");
+//        categorizeSource.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent event) {
+//                EventQueue.invokeLater(new Runnable() {
+//
+//                    @Override
+//                    public void run() {
+//                        ChangeContentCategoryDialog categoryDialog = new ChangeContentCategoryDialog();
+//                        categoryDialog.setVisible(true);
+//                    }
+//                });
+//            }
+//        });
 
         final JMenuItem categorizeContent = new JMenuItem("تغییر دسته بندی محتوا در منبع");
         categorizeContent.addActionListener(new ActionListener() {
@@ -180,7 +180,7 @@ public class AdminPanel extends MainPanel{
         });
 
         sourceMenu.add(addSource);
-        sourceMenu.add(categorizeSource);
+//        sourceMenu.add(categorizeSource);
         sourceMenu.add(categorizeContent);
         sourceMenu.add(contentChange);
         adminMenu.add(assignRole);
