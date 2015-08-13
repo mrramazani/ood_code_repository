@@ -82,7 +82,7 @@ public class AddCommentDialog extends JDialog {
         contentCatalogue.addComment(cmt);
         UserCatalogue userCatalogue = new UserCatalogue();
         userCatalogue.addUserActivity(new UserActivityLog(user, ActivityType.COMMENT, new Date(), "ثبت نظر برای محتوای " + content.getName()));
-        contentCatalogue.log(new ContentChangeLog(content, ChangeType.COMMENT, new Date(), user));
+        contentCatalogue.log(new ContentChangeLog(content, ContentLogType.COMMENT, new Date(), user));
         dispose();
     }
 

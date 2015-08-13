@@ -100,20 +100,6 @@ public class AdminPanel extends MainPanel{
 
             }
         });
-//        final JMenuItem categorizeSource = new JMenuItem("تغییر دسته بندی منبع");
-//        categorizeSource.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent event) {
-//                EventQueue.invokeLater(new Runnable() {
-//
-//                    @Override
-//                    public void run() {
-//                        ChangeContentCategoryDialog categoryDialog = new ChangeContentCategoryDialog();
-//                        categoryDialog.setVisible(true);
-//                    }
-//                });
-//            }
-//        });
 
         final JMenuItem categorizeContent = new JMenuItem("تغییر دسته بندی محتوا در منبع");
         categorizeContent.addActionListener(new ActionListener() {

@@ -18,14 +18,14 @@ public class ContentChangeLog {
     private ObjectId id;
     @Reference
     private Content content;
-    private ChangeType changeType;
+    private ContentLogType contentLogType;
     private Date date;
     @Reference
     private User user;
 
-    public ContentChangeLog(Content content, ChangeType changeType, Date date, User user) {
+    public ContentChangeLog(Content content, ContentLogType contentLogType, Date date, User user) {
         this.content = content;
-        this.changeType = changeType;
+        this.contentLogType = contentLogType;
         this.date = date;
         this.user = user;
     }
@@ -33,12 +33,12 @@ public class ContentChangeLog {
     public ContentChangeLog() {
     }
 
-    public ChangeType getChangeType() {
-        return changeType;
+    public ContentLogType getContentLogType() {
+        return contentLogType;
     }
 
-    public void setChangeType(ChangeType changeType) {
-        this.changeType = changeType;
+    public void setContentLogType(ContentLogType contentLogType) {
+        this.contentLogType = contentLogType;
     }
 
     public Date getDate() {

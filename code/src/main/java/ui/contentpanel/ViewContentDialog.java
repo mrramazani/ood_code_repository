@@ -1,14 +1,16 @@
 package ui.contentpanel;
 
-import content.Comment;
-import content.Content;
-import content.ContentCatalogue;
+import content.*;
+import user.ActivityType;
 import user.User;
+import user.UserActivityLog;
+import user.UserCatalogue;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 public class ViewContentDialog extends JFrame {
@@ -50,6 +52,8 @@ public class ViewContentDialog extends JFrame {
         String tags = builder.toString();
         tagField.setText(tags);
         rateField.setText(String.valueOf(content.getAverageRating()));
+        new UserCatalogue().addUserActivity(new UserActivityLog(user, ActivityType.VIEW, new Date(), "مشاهده ی محتوای: " + content.getName()));
+        new ContentCatalogue().log(new ContentChangeLog(content, ContentLogType.VIEW, new Date(), user));
         // TODO: set comments of table;
 
 
@@ -59,9 +63,8 @@ public class ViewContentDialog extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                int result = fileChooser.showDialog(fileChooser,"Open/Save");
-                if(result == JFileChooser.APPROVE_OPTION)
-                {
+                int result = fileChooser.showDialog(fileChooser, "Open/Save");
+                if (result == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
                     fileAdr.setText(file.getAbsolutePath());
                 }
