@@ -143,10 +143,12 @@ public class DialogAddNewContent extends JDialog {
 
         UserCatalogue userCatalogue = new UserCatalogue();
         userCatalogue.addUserActivity(new UserActivityLog(user, ActivityType.CREATE, new Date(), "ایجاد محتوای جدید: " + content.getName()));
+        JOptionPane.showMessageDialog(this, "محتوای " + content.getName() + " با موفقیت ثبت شد.");
+        dispose();
     }
 
     private void onCancel() {
-        //TODO
+        dispose();
     }
 
 }

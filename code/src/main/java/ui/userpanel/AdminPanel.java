@@ -157,9 +157,8 @@ public class AdminPanel extends MainPanel{
 
                     @Override
                     public void run() {
-                        //TODO
-//                        ChangeContentCategoryDialog categoryDialog = new ChangeContentCategoryDialog();
-//                        categoryDialog.setVisible(true);
+                        AssignFormDialog assignFormDialog = new AssignFormDialog();
+                        assignFormDialog.setVisible(true);
                     }
                 });
             }

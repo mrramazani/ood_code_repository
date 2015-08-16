@@ -38,6 +38,7 @@ public class ViewContentDialog extends JFrame {
     private JTextField source;
     private JLabel access;
     private JComboBox comboBox1;
+    private JButton categorizeBtn;
     private Content content;
     private User user;
 
@@ -112,6 +113,13 @@ public class ViewContentDialog extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 EvaluateContentDialog dialog = new EvaluateContentDialog(user, content);
+                dialog.setVisible(true);
+            }
+        });
+        categorizeBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CategorizeContentDialog dialog = new CategorizeContentDialog(content);
                 dialog.setVisible(true);
             }
         });

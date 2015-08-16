@@ -2,6 +2,7 @@ package ui.contentpanel;
 
 import content.Content;
 import content.ContentCatalogue;
+import user.Role;
 import user.User;
 
 import javax.swing.*;
@@ -59,13 +60,18 @@ public class DialogSearchContent extends JDialog {
     private void search() {
         ContentCatalogue catalogue = new ContentCatalogue();
         Content content = catalogue.search(searchField.getText());
-        if (null != content) {
-            ViewContentDialog viewContentDialog = new ViewContentDialog(content, user);
-            viewContentDialog.setVisible(true);
-            dispose();
+        if (null != content){
+            if (content.getAccessRole().equals(user.getRole()) || content.getAccessRole().equals(Role.REGULAR)) {
+                ViewContentDialog viewContentDialog = new ViewContentDialog(content, user);
+                viewContentDialog.setVisible(true);
+                dispose();
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "شما  به این محتوا دسترسی ندارید.","خطا", JOptionPane.ERROR_MESSAGE);
+            }
         }
         else {
-            JOptionPane.showConfirmDialog(this, "محتوای مورد نظر یافت نشد.","خطا", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "محتوای مورد نظر یافت نشد.","خطا", JOptionPane.ERROR_MESSAGE);
         }
     }
 
