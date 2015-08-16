@@ -2,14 +2,15 @@ package ui.contentpanel; /**
  * Created by hamid on 7/8/2015.
  */
 
+import content.Content;
+import content.ContentCatalogue;
+import user.Role;
 import user.User;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-
+import java.awt.event.*;
+import java.util.List;
 /**
  * Created by hamid on 7/8/2015.
  */
@@ -31,10 +32,56 @@ public class ContentPanel extends JFrame{
     {
         createMenuBar();
 
-        setTitle("سامانه مدیریت دانش");
+        setTitle("پنل مدیریت محتوا");
         setSize(800, 600);
+        GridLayout gridLayout = new GridLayout(6,6, 10, 15);
+        setLayout(gridLayout);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        ContentCatalogue contentCatalogue = new ContentCatalogue();
+        final List<Content> contents = contentCatalogue.listForRole(Role.REGULAR);
+        if (user.getRole().equals(Role.MODERATOR)) {
+            contents.addAll(contentCatalogue.listForRole(Role.MODERATOR));
+        }
+        JLabel[] contentLabels = new JLabel[contents.size()];
+        for (int i = 0; i < contentLabels.length; i++) {
+            contentLabels[i] = new JLabel(contents.get(i).getName());
+            contentLabels[i].setBackground(new Color(66, 239, 245));
+            contentLabels[i].setOpaque(true);
+            contentLabels[i].setMinimumSize(new Dimension(50, 50));
+            contentLabels[i].setPreferredSize(new Dimension(50, 50));
+            contentLabels[i].setMaximumSize(new Dimension(50, 50));
+            final int finalI = i;
+            contentLabels[i].addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    ViewContentDialog dialog = new ViewContentDialog(contents.get(finalI), user);
+                    dialog.setVisible(true);
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
+            this.add(contentLabels[i]);
+
+        }
 //        JTable contentTable = new JTable(10, 5);
 //        TableColumn col = new TableColumn()
     }

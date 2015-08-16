@@ -63,4 +63,8 @@ public class Source {
         this.creator = creator;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }

@@ -1,11 +1,10 @@
-package repository;
+package database;
 
 import com.mongodb.MongoClient;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
 import source.Source;
-import user.User;
 
 import java.util.List;
 

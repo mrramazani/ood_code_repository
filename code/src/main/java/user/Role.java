@@ -5,6 +5,16 @@ package user;
  *         Created on 7/27/2015
  */
 public enum  Role {
-    REGULAR,
-    MODERATOR,
+    REGULAR {
+        @Override
+        public String toString() {
+            return "عادی";
+        }
+    },
+    MODERATOR {
+        @Override
+        public String toString() {
+            return "مدیر";
+        }
+    }
 }

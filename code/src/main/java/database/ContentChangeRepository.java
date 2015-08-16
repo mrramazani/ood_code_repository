@@ -1,8 +1,9 @@
-package repository;
+package database;
 
 import com.mongodb.MongoClient;
 import content.Content;
 import content.ContentChangeLog;
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
@@ -20,7 +21,7 @@ public class ContentChangeRepository extends BasicDAO<ContentChangeLog, String> 
     }
 
     public List<ContentChangeLog> getLogForContent(Content content) {
-        Query<ContentChangeLog> query = createQuery().field("content").equal(content);
+        Query<ContentChangeLog> query = createQuery().disableValidation().field("content").equal(new Key<Content>(Content.class, "Content", content.getId()));
         return find(query).asList();
     }
 }

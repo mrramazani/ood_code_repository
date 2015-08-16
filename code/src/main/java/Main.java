@@ -6,11 +6,8 @@ import com.mongodb.MongoClient;
 import content.Comment;
 import content.Content;
 import content.Relationship;
-import default_.UserLoginDialog;
+import root.UserLoginDialog;
 import org.mongodb.morphia.Morphia;
-import ui.userpanel.AdminPanel;
-import ui.userpanel.MainPanel;
-import ui.userpanel.UserPanel;
 import user.User;
 
 import java.awt.*;

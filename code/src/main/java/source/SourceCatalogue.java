@@ -1,8 +1,8 @@
 package source;
 
 import abstractCatalogue.AbstractCatalogue;
-import repository.KnowledgeRequirementRepository;
-import repository.SourceRepository;
+import database.KnowledgeRequirementRepository;
+import database.SourceRepository;
 
 import java.util.ArrayList;
 import java.util.List;

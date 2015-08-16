@@ -13,6 +13,8 @@ public class UserActivityDialog extends JDialog {
     public UserActivityDialog() {
         setContentPane(contentPane);
         setModal(true);
+        setTitle("گزارش از فعالیت های کاربر");
+        setSize(500,500);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {

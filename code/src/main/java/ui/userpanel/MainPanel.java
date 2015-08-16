@@ -1,6 +1,6 @@
 package ui.userpanel;
 
-import default_.UserLoginDialog;
+import root.UserLoginDialog;
 import ui.contentpanel.ContentPanel;
 import user.User;
 import user.UserCatalogue;
@@ -100,10 +100,8 @@ public class MainPanel extends JFrame {
 
                     @Override
                     public void run() {
-                        //TODO
-//                        CreateUserDialog dialog = new CreateUserDialog();
-//                        dialog.initFields(currentUser, true);
-//                        dialog.setVisible(true);
+                        UserScoreDialog userScoreDialog = new UserScoreDialog();
+                        userScoreDialog.setVisible(true);
                     }
                 });
             }

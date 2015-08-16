@@ -3,16 +3,15 @@ package ui.contentpanel;
 import com.mongodb.MongoClient;
 import content.Content;
 import content.ContentCatalogue;
+import content.RelationShipType;
 import org.mongodb.morphia.Morphia;
 import source.Source;
 import source.SourceCatalogue;
-import user.ActivityType;
-import user.User;
-import user.UserActivityLog;
-import user.UserCatalogue;
+import user.*;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.File;
 import java.util.*;
 
 //@Service
@@ -29,6 +28,9 @@ public class DialogAddNewContent extends JDialog {
     private JLabel filenameLabel;
     private JLabel labelsLabel;
     private JTextField srcField;
+    private JButton upldBtn;
+    private JCheckBox obsolete;
+    private JComboBox access;
     private Content content;
     private User user;
 
@@ -41,11 +43,13 @@ public class DialogAddNewContent extends JDialog {
     }
 
     public DialogAddNewContent(Content content, User user) {
+        // TODO: add another field to content: version, and increase it when
         this.content = content;
         this.user = user;
         initUI();
         TitleTextField.setText(content.getName());
         TitleTextField.setEnabled(false);
+        TitleTextField.setEditable(false);
         TextTextArea.setText(content.getText());
         FilenameTextField.setText(content.getFiles());
         StringBuilder builder = new StringBuilder();
@@ -63,6 +67,8 @@ public class DialogAddNewContent extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(registerButton);
+        for (Role x: Role.values())
+            access.addItem(x);
 
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -73,6 +79,20 @@ public class DialogAddNewContent extends JDialog {
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
+            }
+        });
+
+        upldBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                int result = fileChooser.showDialog(fileChooser,"Open/Save");
+                if(result == JFileChooser.APPROVE_OPTION)
+                {
+                    File file = fileChooser.getSelectedFile();
+                    FilenameTextField.setText(file.getAbsolutePath());
+                }
             }
         });
 
@@ -112,9 +132,13 @@ public class DialogAddNewContent extends JDialog {
         content.setName(TitleTextField.getText());
         content.setText(TextTextArea.getText());
         content.setFiles(FilenameTextField.getText());
+        if (contentCatalogue.isCopy(filenameLabel.getText()))
+            JOptionPane.showMessageDialog(this, "این محتوا کپی شده است.");
         content.setSource(sources.get(0));
         String[] tags = LabelsTextField.getText().split(",");
         content.setTags(Arrays.asList(tags));
+        content.setObsolete(obsolete.isSelected());
+        content.setAccessRole((Role)access.getSelectedItem());
         contentCatalogue.addContent(content);
 
         UserCatalogue userCatalogue = new UserCatalogue();

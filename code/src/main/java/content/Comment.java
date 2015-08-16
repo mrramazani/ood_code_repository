@@ -29,6 +29,9 @@ public class Comment {
         this.content = content;
     }
 
+    public Comment() {
+    }
+
     public ObjectId getId() {
         return id;
     }

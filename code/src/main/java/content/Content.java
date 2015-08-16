@@ -3,7 +3,9 @@ package content;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Indexed;
+import org.mongodb.morphia.annotations.Reference;
 import source.Source;
+import user.Role;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,12 +21,15 @@ public class Content {
     private String name;
     private Date date;
     private String text;
+    @Reference
     private Source source;
     private List<String> tags = new ArrayList<String>();
     private String files;
     private String category;
     private List<Double> ratings = new ArrayList<Double>();
     private double averageRating;
+    private boolean obsolete;
+    private Role accessRole;
 
     public String getName() {
         return name;
@@ -105,5 +110,21 @@ public class Content {
 
     public void setSource(Source source) {
         this.source = source;
+    }
+
+    public boolean isObsolete() {
+        return obsolete;
+    }
+
+    public void setObsolete(boolean obsolete) {
+        this.obsolete = obsolete;
+    }
+
+    public Role getAccessRole() {
+        return accessRole;
+    }
+
+    public void setAccessRole(Role accessRole) {
+        this.accessRole = accessRole;
     }
 }

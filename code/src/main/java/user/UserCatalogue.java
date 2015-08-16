@@ -1,9 +1,9 @@
 package user;
 
 import abstractCatalogue.AbstractCatalogue;
-import content.ContentChangeLog;
-import repository.UserActivityRepository;
-import repository.UserRepository;
+import database.UserActivityRepository;
+import database.UserRepository;
+import org.mongodb.morphia.query.Query;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -56,7 +56,8 @@ public class UserCatalogue extends AbstractCatalogue{
 
     // TODO
     public List<User> search(String keyword) {
-        return null;
+        Query<User> query = userRepository.createQuery().field("username").containsIgnoreCase(keyword);
+        return userRepository.find(query).asList();
     }
 
     public List<UserActivityLog> getActivities(String username) {

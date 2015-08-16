@@ -28,6 +28,9 @@ public class UserActivityLog {
         this.detail = detail;
     }
 
+    public UserActivityLog() {
+    }
+
     public ObjectId getId() {
         return id;
     }

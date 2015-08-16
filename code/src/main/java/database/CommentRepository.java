@@ -1,4 +1,4 @@
-package repository;
+package database;
 
 import com.mongodb.MongoClient;
 import content.Comment;
@@ -22,7 +22,7 @@ public class CommentRepository extends BasicDAO<Comment, String>{
     }
 
     public List<Comment> getComments(Content content) {
-        Query<Comment> query = createQuery().disableValidation().field("content").equal(new Key<Content>(Content.class, "content", content.getId()));
+        Query<Comment> query = createQuery().disableValidation().field("content").equal(new Key<Content>(Content.class, "Content", content.getId()));
         return find(query).asList();
     }
 }

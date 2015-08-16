@@ -17,6 +17,8 @@ public class ChangeUserScoreDialog extends JDialog {
     public ChangeUserScoreDialog() {
         setContentPane(contentPane);
         setModal(true);
+        setSize(500,500);
+        setTitle("تغییر امتیاز کاربر");
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {

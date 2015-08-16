@@ -1,5 +1,6 @@
 package ui.userpanel;
 
+import ui.contentpanel.SourceContentsReportDialog;
 import user.User;
 
 import javax.swing.*;
@@ -101,6 +102,21 @@ public class AdminPanel extends MainPanel{
             }
         });
 
+        final JMenuItem reportSourceContent = new JMenuItem("گزارش از محتوای مختلف یک منبع");
+        reportSourceContent.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                EventQueue.invokeLater(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        SourceContentsReportDialog sourcereportdialog = new SourceContentsReportDialog();
+                        sourcereportdialog.setVisible(true);
+                    }
+                });
+            }
+        });
+
         final JMenuItem categorizeContent = new JMenuItem("تغییر دسته بندی محتوا در منبع");
         categorizeContent.addActionListener(new ActionListener() {
             @Override
@@ -166,7 +182,7 @@ public class AdminPanel extends MainPanel{
         });
 
         sourceMenu.add(addSource);
-//        sourceMenu.add(categorizeSource);
+        sourceMenu.add(reportSourceContent);
         sourceMenu.add(categorizeContent);
         sourceMenu.add(contentChange);
         adminMenu.add(assignRole);

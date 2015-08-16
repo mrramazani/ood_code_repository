@@ -1,4 +1,4 @@
-package repository;
+package database;
 
 import com.mongodb.MongoClient;
 import content.Relationship;

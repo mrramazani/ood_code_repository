@@ -1,4 +1,4 @@
-package repository;
+package database;
 
 import com.mongodb.MongoClient;
 import org.mongodb.morphia.Key;
@@ -23,14 +23,14 @@ public class UserActivityRepository extends BasicDAO<UserActivityLog, String> {
 
     public List<UserActivityLog> getUserActivityForUser(User user) {
 //        Query<UserActivityLog> query = createQuery().field("user").equal(user);
-        Query<UserActivityLog> query = createQuery().disableValidation().field("user").equal(new Key<User>(User.class, "user", user.getId()));
+        Query<UserActivityLog> query = createQuery().disableValidation().field("user").equal(new Key<User>(User.class, "User", user.getId()));
 
         return find(query).asList();
     }
 
     public List<UserActivityLog> getUserActivityForUserByType(User user, ActivityType type) {
 //        Query<UserActivityLog> query = createQuery().field("user").equal(user);
-        Query<UserActivityLog> query = createQuery().disableValidation().field("user").equal(new Key<User>(User.class, "user", user.getId()))
+        Query<UserActivityLog> query = createQuery().disableValidation().field("user").equal(new Key<User>(User.class, "User", user.getId()))
                 .field("type").equal(type);
 
         return find(query).asList();

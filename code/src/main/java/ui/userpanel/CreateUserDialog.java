@@ -1,9 +1,6 @@
 package ui.userpanel;
 
-import user.Employee;
-import user.SysAdmin;
-import user.User;
-import user.UserCatalogue;
+import user.*;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -20,6 +17,7 @@ public class CreateUserDialog extends JFrame {
     private JPasswordField passwordField;
     private JCheckBox isAdmin;
     private JTextArea expertiseField;
+    private JComboBox comboBox1;
 
 //    public AddUserDialog(User user, boolean editable) {
 //        AddUserDialog dialog = new AddUserDialog();
@@ -30,7 +28,8 @@ public class CreateUserDialog extends JFrame {
         setContentPane(contentPane);
         setSize(500, 500);
         getRootPane().setDefaultButton(buttonOK);
-
+        comboBox1.addItem(Role.MODERATOR);
+        comboBox1.addItem(Role.REGULAR);
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
@@ -72,11 +71,15 @@ public class CreateUserDialog extends JFrame {
        isAdmin.setEnabled(false);
        expertiseField.setText(user.getExpertise().toString());
        expertiseField.setEnabled(true);
+       comboBox1.setSelectedItem(user.getRole());
+       comboBox1.setEditable(false);
+       comboBox1.setEnabled(false);
    }
     private void onOK() {
         User user = new User(usernameField.getText(), passwordField.getText(), emailField.getText(),
                 nameField.getText(), lastNameField.getText());
         user.setAdmin(isAdmin.isSelected());
+        user.setRole((Role) comboBox1.getSelectedItem());
         String[] split = expertiseField.getText().split(",");
         user.setExpertise(Arrays.asList(split));
         UserCatalogue userCatalogue = new UserCatalogue();

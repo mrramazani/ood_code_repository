@@ -1,4 +1,4 @@
-package default_;
+package root;
 
 import ui.userpanel.AdminPanel;
 import ui.userpanel.UserPanel;

@@ -24,9 +24,12 @@ public class User {
     private String lastName;
     private List<String> expertise;
     private boolean isAdmin;
+    private Role role;
 
     public User() {
     }
+
+    // TODO: add Builder
 
     public User(String username, String password, String email, String firstName, String lastName) {
         this.username = username;
@@ -99,4 +102,13 @@ public class User {
     public void setId(ObjectId id) {
         this.id = id;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
 }

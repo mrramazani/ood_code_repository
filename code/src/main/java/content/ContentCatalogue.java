@@ -1,11 +1,20 @@
 package content;
 
 import abstractCatalogue.AbstractCatalogue;
-import repository.CommentRepository;
-import repository.ContentChangeRepository;
-import repository.ContentRepository;
-import repository.RelationshipRepository;
+import com.mongodb.client.AggregateIterable;
+import com.mongodb.client.MongoDatabase;
+import database.CommentRepository;
+import database.ContentChangeRepository;
+import database.ContentRepository;
+import database.RelationshipRepository;
+import org.bson.Document;
+import org.mongodb.morphia.Key;
+import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.QueryResults;
+import source.Source;
+import user.Role;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,6 +40,10 @@ public class ContentCatalogue extends AbstractCatalogue {
         return contentRepository.find().asList();
     }
 
+    public List<Content> listForRole(Role role) {
+        return contentRepository.findForRole(role);
+    }
+
     public void addContent(Content content) {
         contentRepository.save(content);
     }
@@ -43,6 +56,10 @@ public class ContentCatalogue extends AbstractCatalogue {
 
     public void addRelation(Relationship relationship) {
         relationshipRepository.save(relationship);
+    }
+
+    public boolean isCopy(String path) {
+        return contentRepository.isCopy(path);
     }
 
     public List<ContentChangeLog> getLog(String contentName) {
@@ -63,5 +80,22 @@ public class ContentCatalogue extends AbstractCatalogue {
     public void addComment(Comment comment) {
         commentRepository.save(comment);
     }
+
+    public Object[][] getSourceContentViews(Source src) {
+
+        final Query<Content> query = contentRepository.createQuery().disableValidation().field("source").equal(new Key<Source>(Source.class, "Source", src.getId()));
+        List<Content> contents = contentRepository.find(query).asList();
+        Object[][] result = new Object[contents.size()][3];
+        for (int i = 0; i < contents.size(); i++) {
+            Query<ContentChangeLog> viewQuery = contentChangeRepository.createQuery().disableValidation().field("contentLogType").equal(ContentLogType.VIEW)
+                    .field("content").equal(new Key<Content>(Content.class, "Content", contents.get(i).getId()));
+            long viewCount = contentChangeRepository.count(viewQuery);
+            result[i][0] = contents.get(i).getName();
+            result[i][1] = contents.get(i).getDate();
+            result[i][2] = viewCount;
+        }
+        return result;
+    }
+
 
 }
