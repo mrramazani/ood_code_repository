@@ -118,7 +118,7 @@ public class ContentPanel extends JFrame{
 
                     @Override
                     public void run() {
-                        DialogAddNewContent anc = new DialogAddNewContent();
+                        DialogAddNewContent anc = new DialogAddNewContent(user);
                         anc.setVisible(true);
                     }
                 });

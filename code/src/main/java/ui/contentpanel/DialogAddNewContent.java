@@ -35,13 +35,12 @@ public class DialogAddNewContent extends JDialog {
 
     private ContentCatalogue contentCatalogue;
 
-    public DialogAddNewContent() {
-
+    public DialogAddNewContent(User user) {
+        this.user = user;
         initUI();
     }
 
     public DialogAddNewContent(Content content, User user) {
-        // TODO: add another field to content: version, and increase it when
         this.content = content;
         this.user = user;
         initUI();
@@ -132,13 +131,16 @@ public class DialogAddNewContent extends JDialog {
         content.setName(TitleTextField.getText());
         content.setText(TextTextArea.getText());
         content.setFiles(FilenameTextField.getText());
-        if (contentCatalogue.isCopy(filenameLabel.getText()))
+        if (contentCatalogue.isCopy(FilenameTextField.getText())) {
             JOptionPane.showMessageDialog(this, "این محتوا کپی شده است.");
+            return;
+        }
         content.setSource(sources.get(0));
         String[] tags = LabelsTextField.getText().split(",");
         content.setTags(Arrays.asList(tags));
         content.setObsolete(obsolete.isSelected());
         content.setAccessRole((Role) access.getSelectedItem());
+        content.setVersion("1");
         contentCatalogue.addContent(content);
 
         contentCatalogue.log(new ContentChangeLog(content, isNew ? ContentLogType.CREATE : ContentLogType.UPDATE, new Date(), user));

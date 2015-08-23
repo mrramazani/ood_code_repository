@@ -100,7 +100,7 @@ public class MainPanel extends JFrame {
 
                     @Override
                     public void run() {
-                        UserScoreDialog userScoreDialog = new UserScoreDialog();
+                        UserScoreDialog userScoreDialog = new UserScoreDialog(currentUser);
                         userScoreDialog.setVisible(true);
                     }
                 });

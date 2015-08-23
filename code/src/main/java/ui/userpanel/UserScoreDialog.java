@@ -14,15 +14,18 @@ public class UserScoreDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextField username;
+    private JLabel usernameLbl;
     private JTable table;
+    private User user;
 
-    public UserScoreDialog() {
+    public UserScoreDialog(User user) {
+        this.user = user;
         setContentPane(contentPane);
         setModal(true);
         setSize(500,500);
         setTitle("مشاهده امتیاز کاربر");
         getRootPane().setDefaultButton(buttonOK);
+        usernameLbl.setText(user.getUsername());
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -52,11 +55,11 @@ public class UserScoreDialog extends JDialog {
 
     private void onOK() {
         UserCatalogue userCatalogue = new UserCatalogue();
-        User search = userCatalogue.getUserByUsername(username.getText());
-        if (search == null) {
-            JOptionPane.showMessageDialog(this, "کاربر با نام کاربری داده شده وجود ندارد.");
-        }
-        DefaultTableModel tableModel = new DefaultTableModel(getUserScores(search), new String[] {"تاریخ","توضیحات"});
+//        User search = userCatalogue.getUserByUsername(usernameLbl.getText());
+//        if (search == null) {
+//            JOptionPane.showMessageDialog(this, "کاربر با نام کاربری داده شده وجود ندارد.");
+//        }
+        DefaultTableModel tableModel = new DefaultTableModel(getUserScores(user), new String[] {"تاریخ","توضیحات"});
         table.setModel(tableModel);
         tableModel.fireTableDataChanged();
         // todo:how to update the ui to see the changes.

@@ -68,7 +68,7 @@ public class EvaluateContentDialog extends JDialog {
         userCatalogue.addUserActivity(new UserActivityLog(user, ActivityType.EVALUATE, new Date(), "ثبت امتیاز ارزیابی محتوا: " + content.getName()));
         final List<ContentChangeLog> specificLog = contentCatalogue.getSpecificLog(content, ContentLogType.CREATE);
         final User user1 = specificLog.get(0).getUser();
-        UserActivityLog log = new UserActivityLog(user1, ActivityType.CHANGE_SCORE, new Date(), "تغییر امتیاز به مقدار" + score.getText() + "به علت: "
+        UserActivityLog log = new UserActivityLog(user1, ActivityType.CHANGE_SCORE, new Date(), "تغییر امتیاز به مقدار" + score.getText() 
                 + "برای ایجاد محتوای " + content.getName());
         Employee employee = new Employee(user1);
         employee.setOverallScore(employee.getOverallScore() + Double.parseDouble(score.getText()));

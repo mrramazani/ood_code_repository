@@ -28,7 +28,9 @@ public class UserCatalogue extends AbstractCatalogue{
 
     // TODO
     public boolean login(User user) {
-        return true;
+        if (authenticate(user.getUsername(), user.getPassword()) != null)
+            return true;
+        return false;
     }
 
     public boolean logout(User user) {
