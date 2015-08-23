@@ -46,8 +46,11 @@ public class ViewContentDialog extends JFrame {
         setContentPane(contentPane);
 //        setModal(true);
         this.setSize(600,600);
+        setTitle("مشاهده محتوا:" + contentIn.getName());
         this.content = contentIn;
         this.user = userIn;
+        if (!user.isAdmin())
+            categorizeBtn.setVisible(false);
         titleField.setText(content.getName());
         titleField.setEditable(false);
         bodyArea.setText(content.getText());
@@ -98,14 +101,14 @@ public class ViewContentDialog extends JFrame {
         versionBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DialogAddNewContent dialog = new DialogAddNewContent(content, user);
+                AddNewVersionDialog dialog = new AddNewVersionDialog(content, user);
                 dialog.setVisible(true);
             }
         });
         cmtBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddCommentDialog dialog = new AddCommentDialog(content, user);
+                AddCommentForm dialog = new AddCommentForm(content, user);
                 dialog.setVisible(true);
             }
         });
@@ -119,7 +122,7 @@ public class ViewContentDialog extends JFrame {
         categorizeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CategorizeContentDialog dialog = new CategorizeContentDialog(content);
+                ChangeContentCategory dialog = new ChangeContentCategory(content);
                 dialog.setVisible(true);
             }
         });

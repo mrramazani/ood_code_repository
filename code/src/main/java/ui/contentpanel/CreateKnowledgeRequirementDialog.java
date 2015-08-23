@@ -1,47 +1,34 @@
-package ui.userpanel;
+package ui.contentpanel;
 
-import source.Source;
+import source.KnowledgeRequirement;
 import source.SourceCatalogue;
-import user.User;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
-public class CreateResourceDialog extends JDialog {
+public class CreateKnowledgeRequirementDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextField srcname;
-    private JTextField path;
-    private JButton pathBtn;
-    private User user;
+    private JTextField tags;
+    private JTextArea body;
+    private JTextField titleField;
 
-    public CreateResourceDialog(User user) {
-        this.user = user;
+    public CreateKnowledgeRequirementDialog() {
+        setSize(400, 600);
+        setTitle("ایجاد یک نیازمندی دانشی");
         setContentPane(contentPane);
         setModal(true);
-        setSize(500,500);
-        setTitle("ایجاد منبع جدید");
         getRootPane().setDefaultButton(buttonOK);
+
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
-        pathBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                int result = fileChooser.showDialog(fileChooser,"Open/Save");
-                if(result == JFileChooser.APPROVE_OPTION)
-                {
-                    File file = fileChooser.getSelectedFile();
-                    path.setText(file.getAbsolutePath());
-                }
-            }
-        });
+
         buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -65,10 +52,11 @@ public class CreateResourceDialog extends JDialog {
     }
 
     private void onOK() {
-        SourceCatalogue sourceCatalogue = new SourceCatalogue();
-        Source src = new Source(srcname.getText(), path.getText(), user);
-        sourceCatalogue.addSource(src);
-        JOptionPane.showConfirmDialog(this, "منبع با موفقیت ایجاد شد.", "", JOptionPane.INFORMATION_MESSAGE);
+        SourceCatalogue catalogue = new SourceCatalogue();
+        List<String> tagList = Arrays.asList(tags.getText().split(","));
+        final KnowledgeRequirement knowledgeRequirement = new KnowledgeRequirement(titleField.getText(), body.getText(), tagList);
+        catalogue.addKnowledgeReq(knowledgeRequirement);
+// addSource your code here
         dispose();
     }
 
@@ -76,5 +64,4 @@ public class CreateResourceDialog extends JDialog {
 // addSource your code here if necessary
         dispose();
     }
-
 }

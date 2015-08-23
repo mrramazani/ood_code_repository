@@ -1,7 +1,10 @@
 package ui.userpanel;
 
+import ui.contentpanel.ChangeContentCategoryDialog;
+import ui.contentpanel.ContentChangeDialog;
 import ui.contentpanel.SourceContentsReportDialog;
 import user.User;
+import user.UserActivityLog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,8 +46,8 @@ public class AdminPanel extends MainPanel{
 
                     @Override
                     public void run() {
-                        CreateUserDialog anc = new CreateUserDialog();
-                        anc.setVisible(true);
+                    CreateUserDialog anc = new CreateUserDialog();
+                    anc.setVisible(true);
                     }
                 });
             }
@@ -58,10 +61,8 @@ public class AdminPanel extends MainPanel{
 
                     @Override
                     public void run() {
-                        // TODO
-
-                        DeleteUserDialog deleteUserDialog = new DeleteUserDialog();
-                        deleteUserDialog.setVisible(true);
+                    DeleteUserDialog deleteUserDialog = new DeleteUserDialog();
+                    deleteUserDialog.setVisible(true);
                     }
                 });
 
@@ -76,8 +77,22 @@ public class AdminPanel extends MainPanel{
 
                     @Override
                     public void run() {
-                        ChangeUserScoreDialog dialog = new ChangeUserScoreDialog();
-                        dialog.setVisible(true);
+                    ChangeUserScoreDialog dialog = new ChangeUserScoreDialog();
+                    dialog.setVisible(true);
+                    }
+                });
+            }
+        });
+        JMenuItem userActivity = new JMenuItem("مشاهده فعالیت های یک کاربر");
+        userActivity.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                EventQueue.invokeLater(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        UserActivityDialog activityDialog = new UserActivityDialog();
+                        activityDialog.setVisible(true);
                     }
                 });
             }
@@ -85,6 +100,7 @@ public class AdminPanel extends MainPanel{
         adminMenu.add(addUser);
         adminMenu.add(deleteUser);
         adminMenu.add(changeScore);
+        adminMenu.add(userActivity);
         JMenuItem addSource = new JMenuItem("ایجاد منبع");
         addSource.addActionListener(new ActionListener() {
             @Override
@@ -93,12 +109,10 @@ public class AdminPanel extends MainPanel{
 
                     @Override
                     public void run() {
-                        CreateResourceDialog resourceDialog = new CreateResourceDialog(getCurrentUser());
-                        resourceDialog.setVisible(true);
+                    CreateResourceDialog resourceDialog = new CreateResourceDialog(getCurrentUser());
+                    resourceDialog.setVisible(true);
                     }
                 });
-
-
             }
         });
 
@@ -110,24 +124,8 @@ public class AdminPanel extends MainPanel{
 
                     @Override
                     public void run() {
-                        SourceContentsReportDialog sourcereportdialog = new SourceContentsReportDialog();
-                        sourcereportdialog.setVisible(true);
-                    }
-                });
-            }
-        });
-
-        final JMenuItem categorizeContent = new JMenuItem("تغییر دسته بندی محتوا در منبع");
-        categorizeContent.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                EventQueue.invokeLater(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        //TODO
-//                        ChangeContentCategoryDialog categoryDialog = new ChangeContentCategoryDialog();
-//                        categoryDialog.setVisible(true);
+                    SourceContentsReportDialog sourcereportdialog = new SourceContentsReportDialog();
+                    sourcereportdialog.setVisible(true);
                     }
                 });
             }
@@ -141,9 +139,8 @@ public class AdminPanel extends MainPanel{
 
                     @Override
                     public void run() {
-                        //TODO
-//                        ChangeContentCategoryDialog categoryDialog = new ChangeContentCategoryDialog();
-//                        categoryDialog.setVisible(true);
+                    ContentChangeDialog dialog = new ContentChangeDialog();
+                    dialog.setVisible(true);
                     }
                 });
             }
@@ -157,8 +154,8 @@ public class AdminPanel extends MainPanel{
 
                     @Override
                     public void run() {
-                        AssignFormDialog assignFormDialog = new AssignFormDialog();
-                        assignFormDialog.setVisible(true);
+                    AssignFormDialog assignFormDialog = new AssignFormDialog();
+                    assignFormDialog.setVisible(true);
                     }
                 });
             }
@@ -182,7 +179,6 @@ public class AdminPanel extends MainPanel{
 
         sourceMenu.add(addSource);
         sourceMenu.add(reportSourceContent);
-        sourceMenu.add(categorizeContent);
         sourceMenu.add(contentChange);
         adminMenu.add(assignRole);
         adminMenu.add(assignRaiseRate);

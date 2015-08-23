@@ -1,9 +1,7 @@
 package ui.contentpanel;
 
 import com.mongodb.MongoClient;
-import content.Content;
-import content.ContentCatalogue;
-import content.RelationShipType;
+import content.*;
 import org.mongodb.morphia.Morphia;
 import source.Source;
 import source.SourceCatalogue;
@@ -121,9 +119,11 @@ public class DialogAddNewContent extends JDialog {
     }
 
     private void addButtonAction() {
-
-        if (null == content)
+        boolean isNew = false;
+        if (null == content) {
+            isNew = true;
             content = new Content();
+        }
         SourceCatalogue sourceCatalogue = new SourceCatalogue();
         List<Source> sources = sourceCatalogue.search(srcField.getText());
         if (sources.size() == 0)
@@ -138,9 +138,10 @@ public class DialogAddNewContent extends JDialog {
         String[] tags = LabelsTextField.getText().split(",");
         content.setTags(Arrays.asList(tags));
         content.setObsolete(obsolete.isSelected());
-        content.setAccessRole((Role)access.getSelectedItem());
+        content.setAccessRole((Role) access.getSelectedItem());
         contentCatalogue.addContent(content);
 
+        contentCatalogue.log(new ContentChangeLog(content, isNew ? ContentLogType.CREATE : ContentLogType.UPDATE, new Date(), user));
         UserCatalogue userCatalogue = new UserCatalogue();
         userCatalogue.addUserActivity(new UserActivityLog(user, ActivityType.CREATE, new Date(), "ایجاد محتوای جدید: " + content.getName()));
         JOptionPane.showMessageDialog(this, "محتوای " + content.getName() + " با موفقیت ثبت شد.");

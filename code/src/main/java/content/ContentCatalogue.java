@@ -72,9 +72,13 @@ public class ContentCatalogue extends AbstractCatalogue {
     }
 
     public List<Comment> getCommentsOfContent(String name) {
-        Content search = search(name);
+        Content search = contentRepository.search(name);
 
         return commentRepository.getComments(search);
+    }
+
+    public List<ContentChangeLog> getSpecificLog(Content content, ContentLogType type) {
+        return contentChangeRepository.getSpecificLog(content, type);
     }
 
     public void addComment(Comment comment) {

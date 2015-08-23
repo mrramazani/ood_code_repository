@@ -1,26 +1,26 @@
-package ui.userpanel;
+package ui.contentpanel;
 
-import user.User;
-import user.UserActivityLog;
-import user.UserCatalogue;
+import content.Content;
+import content.ContentCatalogue;
+import content.ContentChangeLog;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
 import java.util.List;
 
-public class UserActivityDialog extends JDialog {
+public class ContentChangeDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextField username;
+    private JTextField textField;
     private JTable table;
 
-    public UserActivityDialog() {
+    public ContentChangeDialog() {
         setContentPane(contentPane);
         setModal(true);
-        setTitle("گزارش از فعالیت های کاربر");
-        setSize(500,500);
+        setTitle("گزارش از تغییرات محتوا");
+        setSize(500, 500);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {
@@ -50,23 +50,22 @@ public class UserActivityDialog extends JDialog {
     }
 
     private void onOK() {
-        UserCatalogue userCatalogue = new UserCatalogue();
-        final User userByUsername = userCatalogue.getUserByUsername(username.getText());
-        if (userByUsername == null) {
-            JOptionPane.showMessageDialog(this, "کاربر با این نام کاربری موجود نیست.");
-        }
+        ContentCatalogue contentCatalogue = new ContentCatalogue();
+        final Content search = contentCatalogue.search(textField.getText());
+        if (search == null)
+            JOptionPane.showMessageDialog(this, "محتوا با نام مورد نظر وجود ندارد.");
         else {
-            final List<UserActivityLog> activities = userCatalogue.getActivities(username.getText());
-            Object[][] logs = new Object[activities.size()][4];
-            for (int i = 0; i < activities.size(); i++) {
+            final List<ContentChangeLog> log = contentCatalogue.getLog(textField.getText());
+            Object[][] logs = new Object[log.size()][3];
+            for (int i = 0; i < log.size(); i++) {
                 logs[i][0] = new Object();
-                logs[i][0] = activities.get(i).getType();
+                logs[i][0] = log.get(i).getUser().getUsername();
                 logs[i][1] = new Object();
-                logs[i][1] = activities.get(i).getDate();
+                logs[i][1] = log.get(i).getDate();
                 logs[i][2] = new Object();
-                logs[i][2] = activities.get(i).getDetail();
+                logs[i][2] = log.get(i).getContentLogType();
             }
-            DefaultTableModel tableModel = new DefaultTableModel(logs, new String[] {"نوع فعالیت","تاریخ ","جزییات"});
+            DefaultTableModel tableModel = new DefaultTableModel(logs, new String[] {"کاربر عامل","تاریخ ","نوع فعالیت"});
             table.setModel(tableModel);
             tableModel.fireTableDataChanged();
         }

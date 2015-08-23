@@ -69,7 +69,11 @@ public class CreateUserDialog extends JFrame {
        usernameField.setEnabled(false);
        isAdmin.setSelected(user.isAdmin());
        isAdmin.setEnabled(false);
-       expertiseField.setText(user.getExpertise().toString());
+       StringBuilder stringBuilder = new StringBuilder();
+       for (String expertise : user.getExpertise()) {
+           stringBuilder.append(expertise).append(",");
+       }
+       expertiseField.setText(stringBuilder.toString());
        expertiseField.setEnabled(true);
        comboBox1.setSelectedItem(user.getRole());
        comboBox1.setEditable(false);

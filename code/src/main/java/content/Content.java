@@ -19,13 +19,13 @@ public class Content {
     private ObjectId id;
     @Indexed(unique = true)
     private String name;
+    private String version;
     private Date date;
     private String text;
     @Reference
     private Source source;
     private List<String> tags = new ArrayList<String>();
     private String files;
-    private String category;
     private List<Double> ratings = new ArrayList<Double>();
     private double averageRating;
     private boolean obsolete;
@@ -70,15 +70,6 @@ public class Content {
     public void setFiles(String files) {
         this.files = files;
     }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String type) {
-        this.category = type;
-    }
-
 
     public List<Double> getRatings() {
         return ratings;
@@ -126,5 +117,13 @@ public class Content {
 
     public void setAccessRole(Role accessRole) {
         this.accessRole = accessRole;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 }

@@ -133,7 +133,7 @@ public class ContentPanel extends JFrame{
 
                     @Override
                     public void run() {
-                        DialogSearchContent sc = new DialogSearchContent(user);
+                        SearchContentDialog sc = new SearchContentDialog(user);
                         sc.setVisible(true);
                     }
                 });
@@ -150,7 +150,7 @@ public class ContentPanel extends JFrame{
 
                     @Override
                     public void run() {
-                        DialogCreateKnowledgeRequirement dialog_cnr = new DialogCreateKnowledgeRequirement();
+                        CreateKnowledgeRequirementDialog dialog_cnr = new CreateKnowledgeRequirementDialog();
                         dialog_cnr.setVisible(true);
                     }
                 });
