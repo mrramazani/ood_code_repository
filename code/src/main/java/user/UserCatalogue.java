@@ -86,4 +86,8 @@ public class UserCatalogue extends AbstractCatalogue{
             return byUsername;
         return null;
     }
+
+    public void changeRaiseRate(int rate) {
+        userRepository.setRaiseRate(rate);
+    }
 }

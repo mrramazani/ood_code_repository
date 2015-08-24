@@ -1,10 +1,8 @@
 package ui.userpanel;
 
-import ui.contentpanel.ChangeContentCategoryDialog;
 import ui.contentpanel.ContentChangeDialog;
 import ui.contentpanel.SourceContentsReportDialog;
 import user.User;
-import user.UserActivityLog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -169,9 +167,8 @@ public class AdminPanel extends MainPanel{
 
                     @Override
                     public void run() {
-                        //TODO
-//                        ChangeContentCategoryDialog categoryDialog = new ChangeContentCategoryDialog();
-//                        categoryDialog.setVisible(true);
+                        RaiseRateDialog raiseRateDialog = new RaiseRateDialog();
+                        raiseRateDialog.setVisible(true);
                     }
                 });
             }

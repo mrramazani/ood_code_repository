@@ -26,6 +26,7 @@ public class User {
     private boolean isAdmin;
     private Role role;
 
+
     public User() {
     }
 

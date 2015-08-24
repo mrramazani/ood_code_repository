@@ -32,6 +32,8 @@ public class AddCommentForm extends JDialog {
     private void initUI() {
         setContentPane(contentPane);
         setModal(true);
+        setTitle("نظردهی");
+        setSize(500,500);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {

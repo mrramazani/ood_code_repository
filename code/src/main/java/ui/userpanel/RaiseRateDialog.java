@@ -1,18 +1,21 @@
 package ui.userpanel;
 
+import user.UserCatalogue;
+
 import javax.swing.*;
 import java.awt.event.*;
 
-public class ChangeContentCategoryDialog extends JDialog {
+public class RaiseRateDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JTextField textField;
 
-    public ChangeContentCategoryDialog() {
+    public RaiseRateDialog() {
         setContentPane(contentPane);
         setModal(true);
+        setSize(500, 300);
+        setTitle("تعیین میزان افزایش حقوق هر کاربر به ازای هر امتیاز");
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {
@@ -44,12 +47,19 @@ public class ChangeContentCategoryDialog extends JDialog {
     }
 
     private void onOK() {
-// addSource your code here
-        dispose();
+        UserCatalogue userCatalogue = new UserCatalogue();
+        int anInt = Integer.parseInt(textField.getText());
+        if (anInt < 0)
+            JOptionPane.showMessageDialog(this, "میزان افزایش حقوق نباید منفی باشد.");
+        else{
+            userCatalogue.changeRaiseRate(anInt);
+            JOptionPane.showMessageDialog(this, "میزان افزایش حقوق به مقدار " + anInt +" ثبت شد");
+            dispose();
+        }
     }
 
     private void onCancel() {
-// addSource your code here if necessary
+// add your code here if necessary
         dispose();
     }
 }

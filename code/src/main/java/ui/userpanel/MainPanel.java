@@ -53,7 +53,9 @@ public class MainPanel extends JFrame {
         eMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                System.exit(0);
+                setVisible(false);
+                UserLoginDialog userLoginDialog = new UserLoginDialog();
+                userLoginDialog.setVisible(true);
             }
         });
         userMng.add(eMenuItem);

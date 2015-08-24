@@ -15,6 +15,8 @@ public class DeleteUserDialog extends JDialog {
     public DeleteUserDialog() {
         setContentPane(contentPane);
         setModal(true);
+        setTitle("حذف کاربر");
+        setSize(500,500);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {

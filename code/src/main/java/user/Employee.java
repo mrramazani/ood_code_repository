@@ -7,6 +7,7 @@ package user;
  */
 public class Employee extends User {
     private double overallScore;
+    private int raiseRate;
 
 
     public Employee(User user) {
